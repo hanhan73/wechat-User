@@ -1,0 +1,141 @@
+import { Component } from '@angular/core';
+// import { Platform } from 'ionic-angular';
+import { Platform, LoadingController } from 'ionic-angular';
+import { PlatformLocation } from '@angular/common';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { HomePage } from '../pages/home/home';
+import { TAuth }  from '../providers/auth';
+import { RegisterPage } from '../pages/register/register';
+// import { RechargePage } from '../pages/recharge/recharge';
+import { CodePage } from '../pages/code/code';
+// import {OrderPage} from "../pages/order/order";
+// import {OrderPage} from "../pages/order/order";
+@Component({
+  templateUrl: 'app.html'
+})
+
+export class MyApp
+{
+  // rootPage:any = CodePage;
+
+  // constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  //   platform.ready().then(() => {
+  //     // Okay, so the platform is ready and our plugins are available.
+  //     // Here you can do any higher level native things you might need.
+  //     statusBar.styleDefault();
+  //     splashScreen.hide();
+  //   });
+  // }
+  rootPage = undefined;
+  loader = undefined;
+
+  constructor(
+    private platform: Platform,
+    private Auth: TAuth,
+    private loadingCtrl: LoadingController,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
+    location: PlatformLocation)
+  {
+    this.Loading();
+    Auth.GetRequestParam(location.search);
+    // Auth.login().then(
+    //   data => this.Init(data),
+    //   error => this.LoginFail(error)
+    // );
+    //判断是否微信用户
+    this.Auth.IfNewUser().then(
+      data => this.IfNew(data),
+      error => console.log(error+'1212121')
+    )
+  }
+  //初始化 调用请求是否为新用户的方法 customer/openid
+  IfNew(data){
+    console.log(data)
+    let newU=data.status;
+    let da=data.data;
+    console.log(newU);
+    if(1==newU){
+      //跳转home
+      console.log(da);
+      this.rootPage = HomePage;
+      this.FreeLoading();
+      // this.navCtrl.push(HomePage);
+    }else if(0==newU){
+      this.rootPage = RegisterPage;
+      this.FreeLoading();
+      // this.navCtrl.push(RegisterPage) ;
+    }else if (-1==newU){
+      this.rootPage = CodePage;
+      this.FreeLoading();
+    }
+  }
+
+  // Init(data)
+  // {
+  //   if (data.ErrorCode == undefined)
+  //   {
+  //     this.Auth.UserId = data.id;
+  //     localStorage.setItem('token', data.token);
+  //
+  //     let uri = "user/" + data.id;
+  //     this.Auth.Get(uri).then(
+  //       UserInfo => this.LoginOK(UserInfo),
+  //       error => console.log(error)
+  //     );
+  //   }
+  //   else
+  //   {
+  //     this.LoginFail(data);
+  //   }
+  // }
+
+  // LoginOK(data)
+  // {
+  //   this.Auth.UserInfo = data;
+  //   this.Start();
+  // }
+  //
+  // LoginFail(data)
+  // {
+  //   console.log(data);
+  //   this.Start();
+  // }
+
+  Start()
+  {
+    this.rootPage = HomePage;
+    this.platform.ready().then(() =>
+      {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+        this.FreeLoading();
+      }
+    );
+  }
+
+  Loading(context="数据加载中", duration=5000)
+  {
+      if (this.loadingCtrl != undefined)
+      {
+          this.loader = this.loadingCtrl.create(
+              {
+                  content: context,
+                  duration: duration
+              }
+          );
+          this.loader.present();
+      }
+  }
+
+  FreeLoading()
+  {
+      if (this.loader != undefined)
+      {
+          this.loader.dismiss();
+      }
+  }
+
+}
+

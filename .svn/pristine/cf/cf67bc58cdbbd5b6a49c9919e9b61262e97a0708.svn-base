@@ -1,0 +1,7 @@
+<ion-content padding >
+  <tr *ngFor="let li of list">
+    <td>{{li}}</td>
+    <td>{{li}}</td>
+    <td>{{li}}</td>
+  </tr>
+</ion-content>

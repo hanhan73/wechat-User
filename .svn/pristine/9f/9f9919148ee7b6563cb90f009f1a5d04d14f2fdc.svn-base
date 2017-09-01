@@ -1,0 +1,107 @@
+page-order{
+* {
+  padding: 0px;
+  margin: 0px auto;
+  box-sizing:content-box;
+  font-family: $font-family;
+}
+  .cardnum{
+    color: #3CB1FF;
+    margin-left: 7%;
+    margin-top: 10%;
+    float: left;
+    width: 25%;
+    height: 50%;
+    border: 1px solid #8c8c8c;
+  }
+  .header{
+    width: 100%;
+    height: 100%;
+  }
+  .wen{
+    margin-left: 50%;
+    padding-top: 5%;
+  }
+  .wen  span{
+    font-size: 17px;
+    color: #3CB1FF;
+  }
+
+  .wen ion-label{
+    margin-top: 10px;
+    color:#A1A1A1;
+  }
+   dl{
+    font-size: smaller;
+    margin-left: 48%;
+     margin-top: 5%;
+     color:#A1A1A1;
+  }
+   dl dt, dl dd{
+     float: left;
+     padding: 0;
+     margin: 0;
+  };
+   dl dt img{
+    width: 48%;
+    margin-left: 40%;
+  }
+
+  .col{
+    padding:0px;
+  }
+
+  ion-grid{
+    color: #4d4d4d;
+    width: 100%;
+  }
+  ion-col {
+    color:#49B7FE;
+    height: 10%;
+    border:  1px solid #49B7FE;
+    border-radius: 5px;
+  }
+  ion-col ion-label{
+    padding: 6% 7%;
+    text-align: center;
+    word-wrap: break-word;
+  }
+  .label-md{
+    margin: 0px;
+  }
+  .one{
+    margin: 3%;
+    width: 120px;
+  }
+  .two{
+    background-color:#15A6FF;
+    color: white;
+    padding: 17% 1%;
+    width: 30px;
+    float: left;
+    text-align: center;
+  }
+  .tishi{
+    color:#A1A1A1;
+    margin-left: 3%;
+    padding-top: 3%;
+  }
+  .tishi2{
+    color:#A1A1A1;
+    margin-left: 11%;
+  }
+  h5{
+    font-size: 16px;
+    color:#49B7FE;
+    margin-left: 3%;
+    padding-top: 5%;
+  }
+  h5 span{
+    color:#FF791F;
+  }
+  .button{
+    background-color:#15A6FF;
+    width: 78%;
+    margin-left: 11%;
+  }
+}

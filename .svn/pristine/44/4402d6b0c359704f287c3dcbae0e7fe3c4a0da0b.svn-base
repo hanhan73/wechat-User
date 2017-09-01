@@ -1,0 +1,116 @@
+page-order{
+* {
+  padding: 0px;
+  margin: 0px auto;
+  box-sizing:content-box;
+  font-family: $font-family;
+}
+  //弹窗按钮样式
+  .alertbuttn{
+    background-color: #0299fe;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+  }
+  ion-header{
+  }
+  .cardnum{
+    margin: 2rem 0 1rem 1rem;
+    color: #0299fe;
+    width: 15.5rem;
+    height: 10.5rem;
+    background: url("../../assets/icon/Order/card.png") no-repeat;
+    background-size: cover;
+    display: inline-block;
+  }
+    .ca{
+      float: right;
+      margin-left: 4.5rem;
+      margin-right: 1rem;
+      border:  1px solid #0299fe;
+      border-radius: 10px;
+      height: 6rem;
+      padding: 0 1rem;
+      width: 4.5rem;
+      margin-top: 1rem;
+      font-size: 14px;
+  }
+  //.col{
+  //  padding:0px;
+  //  width: 0%;
+  //  height: 0%;
+  //  flex-grow: 0;
+  //  flex-basis: 120px;
+  //}
+  ion-header a{
+    //vertical-align: top;
+    display: block;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+  ion-header a span{
+    color: #f4910e;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+
+  ion-row{
+    margin: 1rem;
+  }
+  ion-col{
+    border: 1px solid #15a6ff;
+    height: 8rem;
+    background: url("../../assets/icon/Order/blue.png") bottom no-repeat;
+    background-size: 100%;
+  }
+  ion-col ion-label {
+    text-align: center;
+  }
+  .colable{
+    color: white;
+  }
+  .col{
+    margin: 1rem;
+    flex-basis: 140px;
+    flex-grow: 0;
+  }
+  .label{
+    margin: 10px 8px 10px 0;
+  }
+  .one{
+    margin: 0.1rem;
+    width: 120px;
+  }
+  .two{
+    background-color:#15A6FF;
+    color: white;
+    padding: 17% 1%;
+    width: 30px;
+    float: left;
+    text-align: center;
+  }
+  .tishi{
+    color:#A1A1A1;
+    margin-left: 3%;
+    padding-top: 3%;
+  }
+  .tishi2{
+    color:#A1A1A1;
+    margin-left: 11%;
+  }
+  h5{
+    font-size: 16px;
+    color:#49B7FE;
+    margin-left: 3%;
+    padding-top: 5%;
+  }
+  h5 span{
+    color:#FF791F;
+  }
+  .button{
+    background-color:#15A6FF;
+    width: 78%;
+    margin-left: 11%;
+  }
+}

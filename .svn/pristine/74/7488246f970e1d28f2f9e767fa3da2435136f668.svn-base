@@ -1,0 +1,27 @@
+<ion-content *ngIf="actionItem">
+  <ion-row>
+    <ion-col class="action-text" style="color: white">
+      支付激活设备，畅享智慧生活
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="actionrmb">
+     ￥{{actionItem.price/100}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="actiontwo">
+      <ion-label >内含{{(actionItem.sub_good_type==0)?(actionItem.flow_size/1024):(actionItem.flow_size)}}
+        <span *ngIf="actionItem.sub_good_type == 0">G流量套餐</span>
+        <span *ngIf="actionItem.sub_good_type !=0">个月无限套餐</span>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col class="action_btn">
+      <button style="width: 60%" ion-button (click)="ActionPay()">立即支付</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

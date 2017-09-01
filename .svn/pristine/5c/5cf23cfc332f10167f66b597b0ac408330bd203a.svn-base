@@ -1,0 +1,72 @@
+<ion-content>
+  <ion-grid no-padding class="sign-top-bg">
+    <ion-row class="sign-offset">
+      <ion-col>
+        <div class="sign-round">
+          <label class="sign-round-label"><strong>已签到</strong></label>
+          <hr class="sign-round-line"/>
+          <label class="sign-round-label2">连续2天</label>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-label><strong>我的积分<i class="credit">{{credit}}</i></strong></ion-label>
+          <ion-label style="margin-top: -4%">积分明细</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <!--积分进度条-->
+      <div class="credit-progress">
+        <span class="credit-progress-fill" [ngStyle]="{'width':credit+'%'}"></span>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid no-padding class="sign-middle-bg">
+    <ion-row justify-content-center style="margin-top: -6%">
+      <!--日历-->
+      <ion-col col-6 class="sign-calendar">
+        <div class="list-date-week">
+          <ul class="list-date-circle">
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+          </ul>
+          <ul class="list-date-group">
+            <li class="text-danger">日</li>
+            <li>一</li>
+            <li>二</li>
+            <li>三</li>
+            <li>四</li>
+            <li>五</li>
+            <li class="text-danger">六</li>
+          </ul>
+          <ul class="list-date-group">
+            <li *ngFor="let item of days" [ngClass]="item.style">{{item.day}}</li>
+          </ul>
+          <!--<div class="sign-calendar-pen"></div>-->
+        </div>
+        <ion-row style="max-height: 4rem">
+          <ion-col><div class="sign-calendar-gold"></div></ion-col>
+          <ion-col><div class="sign-calendar-pen"></div></ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="sign-bottom" padding-right>
+      <h2>————  <strong>签到攻略</strong>  ————</h2>
+      <ul>
+        <li>每日签到奖励积分<span class="label-blue">5积分</span>,连续签到7日有额外奖励 <span class="label-blue">50积分</span></li>
+        <li>活动日签到奖励积分<span class="label-blue">随机翻倍</span></li>
+        <li>每月全勤签到额外奖励<span class="label-blue">200积分</span></li>
+        <li>消耗积分可参与抽奖活动，也可以兑换流量(1积分=1MB流量),满<span class="label-blue">100/200/300/500</span>积分时可一键兑换</li>
+        <li>积分每月1日自动清零</li>
+      </ul>
+  </div>
+</ion-content>

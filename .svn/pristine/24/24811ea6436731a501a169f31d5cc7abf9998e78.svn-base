@@ -1,0 +1,175 @@
+page-home {
+  .animation-img {
+      animation: auto-strench 1s linear;
+  } 
+  
+  .header-item {
+      height: 40%;
+      .bg-img {
+          background: url(../../assets/home/bg.png) no-repeat;
+          background-size: 100% 100%;
+          width: 100%;
+          height: 100%;    
+          z-index: 0;
+      }
+
+      .slide-size {
+          height: 95%;          
+          margin-left: 6%;
+          margin-right: 6%;
+          margin-top: 3%;
+      }
+
+      .slide-device {
+          //background: lightcoral;
+          height: 100%;
+      }
+
+      .card {            
+          height: 14rem; //此处未自适应高度
+          .card-round {
+              position: relative;
+              height: 100%;
+              width: 100%;
+              z-index: 1;
+          }
+                  
+          .head-content {
+              position: absolute;
+              //background: lightgray;
+              height: 5.5rem;
+              width: 100%;
+              background-size: 100% 100%;
+              left: 0;
+              top: -2.75rem;
+              padding: 0 10%; //左右10个间距
+              z-index: 2;   
+              
+              .portrait {
+                  float: left;
+                  height: 5.5rem;
+                  border: 1.5px #fef9e3 solid;
+                  border-radius: 100%;
+              }    
+              
+              .sign-btn {
+                  background: url(../../assets/home/sign.png) no-repeat;
+                  height: 3rem;
+                  width: 8rem;
+                  float: right;
+                  margin-top: 1.25rem;
+                  background-size: 100% 100%;        
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  .button-label {
+                      text-align: center;
+                      color: white;
+                      font-size: 1.6rem;
+                  }            
+              }                                
+              
+          }
+      
+          .background-img {
+              position: absolute;
+              background: url(../../assets/home/card.png) no-repeat;
+              height: 100%;
+              width: 100%;
+              background-size: 100% 100%;
+
+              .content {
+                  margin-top: 20%;
+                  margin-left: 5%;
+                  margin-right: 5%;
+                  color: white;
+                  text-align: left;
+                  .iccid {
+                      color: lightgray;
+                      font-size: 1.4rem;                        
+                  }    
+                  .left-flow {
+                      position: relative;
+                      font-size: 1.8rem;
+                      height: 3.6rem;
+                      display: flex;
+                      align-items: center;                    
+                  }    
+                  .left-day {
+                      font-size: 1.4rem;                
+                  }                            
+              }
+
+              .error-content {     
+                  height: 100%;               
+                  .character {
+                      position: absolute;
+                      height: 60%;
+                      left: 70%;
+                      top: 20%;
+                  }
+
+                  .message {
+                      position: relative;
+                      background: url(../../assets/home/bg2.png) center no-repeat;
+                      background-size: 100% 30%;
+                      background-position: 0 0;
+                      height: 6rem;
+                      width: 60%;                        
+                      margin-left: 10%;
+                      margin-top: 2.75rem;
+                      .round {
+                          position: absolute;
+                          background: #A59CFF;
+                          height: 70%;
+                          width: 100%;
+                          top: 30%;
+                          padding: 0 5%;
+                          border-radius: 1rem;
+                          font-size: 1.5rem;
+                          color: white;
+                          display: flex;
+                          align-items: center;
+                          word-wrap: break-word;
+                      }
+                  }
+
+                  .query-content
+                  {
+                      margin-top: 3%;
+                      .query-button {
+                          max-height: 2.5rem;
+                      }
+                  }
+              }
+          }                    
+      }
+              
+  }
+
+
+  // .banner {
+  //   //background-color: #8c8c8c;
+  // }
+
+  .func-content {    
+    text-align: center;    
+    font-size: 1.4rem;
+    .img {
+      padding: 10%;
+    }
+  }  
+}
+
+@keyframes auto-strench {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

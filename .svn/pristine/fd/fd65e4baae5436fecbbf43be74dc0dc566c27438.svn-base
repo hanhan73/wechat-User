@@ -1,0 +1,47 @@
+page-recharge{
+  .rehead{
+    color: white;;
+    font-size: 1.4rem;
+    border-right: 1px white solid;
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .label{
+    padding: 0rem;
+    margin: 0px;
+  }
+  ion-label strong{
+    font-size: 2.5rem;
+  }
+  .cardbg{
+    background: url("../../assets/icon/recharge/card.png" ) no-repeat;
+    background-size: 100% 100%;
+    margin-left: 15%;
+    width: 70%;
+    height: 14.8rem;
+  }
+  .cardbg ion-label{
+    padding-top: 2%;
+    color: #8d8d8d;
+  }
+  .cardcol{
+    font-size: 1.4rem;
+    border-right: 1px #dddddd solid;
+  }
+  .col{
+    text-align: center;
+  }
+  .item{
+    min-height: 3rem;
+  }
+  .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+    bottom: 0px;
+  }
+
+  .list-ios > .item-block:first-child {
+    border-top: none;
+    margin-top: 5%;
+  }
+}

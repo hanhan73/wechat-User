@@ -1,0 +1,12 @@
+//import * as wx from 'jweixin';
+
+
+//npm install jweixin -s
+
+//npm install @types/jweixin -D
+
+//ionic build brower --prov
+
+//cordova platform add brower
+
+      //"proxyUrl": "http://127.0.0.1:8080"

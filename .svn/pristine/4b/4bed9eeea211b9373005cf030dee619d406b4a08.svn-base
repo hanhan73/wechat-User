@@ -1,0 +1,59 @@
+<ion-content no-padding class="content-bg">
+    <div class="content-input">
+      <ion-row nowrap class="input-round">
+        <ion-input type="text" placeholder="请输入ICCID号" maxlength="20" [(ngModel)]="numCard" (ngModelChange)="getItems($event)"></ion-input>
+        <div class="before-search-round"><div class="before-search-button"></div></div>
+        <button class="search-button" (click)="querycard()">查询</button>
+      </ion-row>
+      <ion-row >
+        <div class="input-histroy" *ngIf="CanShowHistroy()">
+          <ion-row *ngFor="let item of show_items" [ngClass]="item.style" (click)="SelectItem(item.text)">{{item.text}}</ion-row>
+        </div>
+      </ion-row>
+    </div>
+
+    <ion-row style="margin-top: 15%" justify-content-center *ngIf="found">
+      <ion-col>
+        <div class="outer-rings left-top" [class.opacity-img]="animateIninitial">
+          <img src="assets/images/branch_cc@2x.png">
+          <div class="texts">{{iccid.type}}</div>
+        </div>
+        <div class="outer-rings left-bottom" [class.opacity-img]="animateIninitial">
+          <img src="assets/images/branch_C@2x.png">
+          <div class="texts">剩余{{iccid.left_day}}天</div>
+        </div>
+      </ion-col>
+      <ion-col col-5>
+        <div class="inner-box">
+          <ul>
+            <li>剩余流量</li>
+            <li>{{flow}}MB</li>
+          </ul>
+        </div>
+        <div class="loading-items" [class.rotate-items]="animateIninitial"></div>
+      </ion-col>
+      <ion-col>
+        <div class="outer-rings right-top" [class.opacity-img]="animateIninitial">
+          <img src="assets/images/branch_@2x.png">
+          <div class="texts">状态:{{iccid.state}}</div>
+        </div>
+        <div class="outer-rings right-bottom" [class.opacity-img]="animateIninitial">
+          <img src="assets/images/branch@2x.png">
+          <div class="texts">已使用{{iccid.used_flow}}M</div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="found" style="margin-top: 15%">
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <ion-row justify-content-center class="footer-hint">查询结果及充值可能稍有延迟， 请耐心等待</ion-row>
+        <ion-row justify-content-center class="footer-hint">点击绑定可将流量卡绑定至个人中心</ion-row>
+        <ion-row nowrap class="footer-content">
+          <button ion-button primary outline (click)="Todevice()" class="footer-button">绑定</button>
+          <button ion-button primary outline (click)="ToOrder()" class="footer-button">充值</button>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-col></ion-col>
+</ion-content>
+

@@ -1,0 +1,140 @@
+page-signin{
+  ion-content{
+    position: relative;
+  }
+ .ring{
+   position: absolute;
+   color: #a97415;
+   top: 2rem;
+   font-size:1.4rem;
+   left: 9rem;
+   background: url(../../assets/icon/Signin/qq.png) no-repeat;
+   background-size: 100%;
+   width: 6rem;
+   height: 6rem;
+ }
+  .ring  ion-label{
+    margin: 0;
+    text-align: center;
+  }
+  .mylable{
+    position: absolute;
+    top:3rem;
+    left: 17rem;
+    font-size:1.6rem;
+  }
+  .mylable ion-label{
+    margin: 0;
+    padding-top: 0.3rem;
+  }
+  .between{
+    position: absolute;
+    width: 20rem;
+    top:12.5rem;
+    left: 6.2rem ;
+  }
+  .gold{
+    position: absolute;
+    width: 6rem;
+    margin-top: -2.3rem;
+    left:7rem;
+  }
+  .pen{
+    position: absolute;
+    width: 4rem;
+    left: 13rem;
+    margin-top: -4.5rem;
+  }
+  #calendar{
+    position: absolute;
+    margin-top: -12rem;
+    left: 4rem;
+    letter-spacing: 0.6rem;
+    font-size: 1.2rem;
+  }
+  .di{
+    font-weight: 500;
+    color: #753307;
+    padding-left: 1rem;
+    font-size: 12px;
+    text-align: left;
+  }
+  .di ion-label{
+    margin: 0px;
+    margin-top: 0.7rem;
+    margin-left: 0.5rem;
+  }
+
+  .di span{
+    color: #46b9fb;
+  }
+  .col{
+    height: 9px;
+    text-align: center;
+    margin: 0.17rem 0rem;
+    padding: 0rem;
+    letter-spacing: 0rem;
+    flex-basis: 20px;
+    flex-grow: 0;
+    font-size: 1.3rem;
+  }
+
+  /*
+  进度条
+   */
+  .title {
+    color:#b2b2b2;
+    font-size: 12%;
+    float: left;
+    margin-left: 25%;
+    margin-top: 2.5%;
+  }
+  .container {
+    width: 70%;
+    position: absolute;
+    top: 15%;
+    left: 17%;
+    //border:1px #ABDFFE solid;
+    border-radius: 8px;
+    margin-top: 2.5%;
+  }
+  .num{
+    float: right;
+    margin-right: 10%;
+    margin-top: -0.5%;
+    height: 4px;
+    font-size: 12px;
+    color: #A0A59E;
+  }
+  .num2{
+    float: left;
+    margin-left: 35%;
+    margin-top: -2%;
+    height: 4px;
+    font-size: 12px;
+    color: white;
+  }
+  .bar-unfill {
+    background: #a67615;
+    width: 100%;
+  }
+  .bar-fill {
+    background: #0daffe;
+    height: 1rem;
+    display: block;
+    border-radius: 8px;
+    //-webkit-transition: width .8s ease;
+    //-moz-transition: width .8s ease;
+    //transition: width .8s ease;
+    //-webkit-animation: progressbar 7s infinite;
+    //animation: progressbar 7s infinite
+
+  }
+}
+span{
+  &[fill]{
+    height: 1rem;
+    display: block;
+    border-radius: 8px;
+  }
+}

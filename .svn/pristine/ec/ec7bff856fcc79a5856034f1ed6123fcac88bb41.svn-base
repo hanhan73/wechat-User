@@ -1,0 +1,71 @@
+/**
+ * Created by Administrator on 2017/7/18/018.
+ */
+import { ElementRef, Component} from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TAuth } from '../services';
+import { TopupService } from '../services';
+import {error} from "jweixin";
+//import {error} from "jweixin";
+
+@Component({
+  selector: 'page-action',
+  templateUrl: 'action.html'
+})
+
+export class ActionPage extends TCommonPage
+{
+  constructor(private el: ElementRef,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public loadingCtrl: LoadingController,
+              public toastCtrl: ToastController,
+              public auth: TAuth,
+              public top: TopupService)
+
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+
+
+    this.auth.ActivateOrder().then(
+      data => this.InitAction(data),
+      error => console.log(error)
+    )
+  }
+
+  InitAction(data) {
+    localStorage.removeItem('genre');
+    this.actionItem = data.data;
+    console.log(this.actionItem);
+  }
+
+  ActionPay() {
+    let icc = localStorage.getItem('iccid');
+    localStorage.removeItem('iccid')
+    this.auth.CreateOrder(
+      icc, this.actionItem.id,this.actionItem.price
+    ).then(
+     data => this.ToPay(data),
+      error => console.log(error)
+    )
+
+  }
+
+  ToPay(data) {
+    if (data.status ==1) {
+      this.weiItem = data.data;
+      console.log(this.weiItem)
+      this.top.ToPay(this.weiItem);
+    }
+    else {
+      console.log(data.status)
+      console.log('创建订单错误：')
+      console.log(data.msg)
+    }
+  }
+
+  private actionItem;
+  private weiItem;
+}

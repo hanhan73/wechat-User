@@ -1,0 +1,60 @@
+page-recharge{
+
+  .rechargehead {
+    height: 18%;
+    background: url(../../assets/icon/recharge/bg.png) no-repeat;
+    background-size: 100%;
+  }
+
+  .rehead{
+    color: white;
+    font-size: 1.4rem;
+    border-right: 1px white solid;
+    text-align: center;
+    margin-top: 1rem;
+
+  }
+
+  ion-label strong{
+    font-size: 2.5rem;
+  }
+
+  .cardcol{
+    font-size: 1.2rem;
+    color: #969696;
+    text-align: center;
+  }
+
+  .bgimgcol {
+    background: url("../../assets/icon/recharge/car.png") no-repeat;
+    background-size: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+
+    ion-label {
+      margin: 4% 8% 2% 0;
+    }
+  }
+  .titlerow {
+
+    ion-col {
+      text-align: center;
+    }
+  }
+  .inforow {
+
+    ion-col {
+      text-align: center;
+    }
+  }
+
+  .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+    bottom: 0px;
+  }
+
+  .list-ios > .item-block:first-child {
+    border-top: none;
+    margin-top: 5%;
+  }
+}

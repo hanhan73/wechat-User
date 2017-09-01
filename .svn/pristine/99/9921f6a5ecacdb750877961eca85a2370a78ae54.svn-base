@@ -1,0 +1,94 @@
+<ion-header >
+  <ion-label class="share_lable">余额 <span>2000元</span></ion-label>
+  <ion-row>
+    <ion-col >
+      70<br/>累计分润
+    </ion-col>
+    <ion-col>
+      70<br/>代理总数
+    </ion-col>
+    <ion-col>
+      70<br/>累计销量
+    </ion-col>
+    <ion-col>
+      70<br/>累计提现
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <ion-card >
+    <ion-label class="cardlable">可提现总金额：10580元<button ion-button class="cardbtn">提现</button></ion-label>
+  </ion-card>
+  <ion-card style="height: 9.5rem">
+    <ion-row class="deposit">
+      <ion-col style="padding-top: 3rem;font-size: 1.6rem;margin-left: -16px;">提现记录</ion-col>
+      <ion-col>
+        <ion-label>2323</ion-label>
+        <ion-label>2323</ion-label>
+        <ion-label>2323</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>2323</ion-label>
+        <ion-label>2323</ion-label>
+        <ion-label>2323</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-list  style="height: 7rem;">
+      <ion-item style="height: 7rem;">
+        <ion-avatar item-start>
+          销售记录
+        </ion-avatar>
+        <p style="border-bottom: 1px solid #e6e6e6;">
+          <ion-col>Don't Know </ion-col>
+          <ion-col>Don't Know </ion-col>
+          <ion-col>Don't Know</ion-col>
+        </p>
+        <p>
+          <ion-col>Don't Know </ion-col>
+          <ion-col>Don't Know </ion-col>
+          <ion-col>Don't Know</ion-col>
+        </p>
+      </ion-item>
+  </ion-list>
+  <ion-list class="listcss">
+    <ion-list-header>
+      我的产品
+    </ion-list-header>
+    <ion-row style="height: 11.5rem;">
+      <ion-col>
+        <img src="assets/icon/myshare/02.png" >
+        <p>累计销售100台</p>
+        <p>累计分润1000元</p>
+      </ion-col>
+      <ion-col>
+        <img src="assets/icon/myshare/02.png" >
+        <p>累计销售100台</p>
+        <p>累计分润1000元</p>
+      </ion-col>
+      <ion-col>
+        <img src="assets/icon/myshare/02.png" >
+        <p>累计销售100台</p>
+        <p>累计分润1000元</p>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  <ion-list style=" margin-top: -35px;">
+    <ion-list-header>我的下级代理</ion-list-header>
+    <ion-row class="agency">
+      <ion-col>
+        <img src="assets/icon/myshare/02.png" >
+      </ion-col>
+      <ion-col>
+        <img src="assets/icon/myshare/02.png" >
+      </ion-col>
+      <ion-col>
+        <img src="assets/icon/myshare/02.png" >
+      </ion-col>
+      <ion-col>
+        <img src="assets/icon/myshare/02.png" >
+      </ion-col>
+
+    </ion-row>
+  </ion-list>
+</ion-content>

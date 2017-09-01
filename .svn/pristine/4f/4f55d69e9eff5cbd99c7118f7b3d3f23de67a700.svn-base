@@ -1,0 +1,16 @@
+page-code {
+  *{
+  padding: 0;
+    margin: 0;
+  }
+  #back{
+    position: relative;
+  }
+  #code{
+    position: absolute;
+    width: 50%;
+    height: 28%;
+    right: 25%;
+    top: 51%;
+  }
+}

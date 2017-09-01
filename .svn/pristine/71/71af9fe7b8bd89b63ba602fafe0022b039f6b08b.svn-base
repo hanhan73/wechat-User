@@ -1,0 +1,221 @@
+import { Component ,ViewChild} from '@angular/core';
+import { Platform,Nav, ToastController,LoadingController ,IonicApp} from 'ionic-angular';
+import { PlatformLocation } from '@angular/common';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { HomePage } from '../pages/home/home';
+import { TAuth }  from '../providers/auth';
+import { RegisterPage } from '../pages/register/register';
+import { SrechargePage } from '../pages/srecharge/srecharge';
+import { CodePage } from '../pages/code/code';
+// import { DrawPage } from '../pages/draw/draw';
+import { ActionPage } from '../pages/action/action'
+import { SigninPage } from '../pages/signin/signin';
+import {RechargePage} from "../pages/recharge/recharge";
+import {OrderPage} from "../pages/order/order";
+import {MysharePage} from "../pages/myshare/myshare";
+// import {OrderPage} from "../pages/order/order";
+@Component({
+  templateUrl: 'app.html'
+})
+
+export class MyApp
+{
+  rootPage = undefined;
+  loader = undefined;
+
+   // backButtonPressed: boolean = false;
+  // 用于判断返回键是否触发
+  // @ViewChild('myNav') nav: Nav;
+
+  constructor(
+    private platform: Platform,
+    private Auth: TAuth,
+    private loadingCtrl: LoadingController,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
+    private toastCtrl: ToastController,
+    private ionicApp: IonicApp,
+    location: PlatformLocation)
+  {
+    this.Loading();
+    Auth.GetRequestParam(location.search);
+
+
+    this.Auth.login().then(
+      data => localStorage.setItem('token',data.token),
+      error => console.log(error)
+    )
+    console.log(localStorage.getItem('token'));
+    console.log(localStorage.getItem('openid'));
+    //判断是否微信用户
+    this.Auth.IfNewUser().then(
+      data => this.IfNew(data),
+      error => console.log(error+'1212121')
+    )
+  }
+  //初始化 调用请求是否为新用户的方法 customer/openid
+  IfNew(data)
+  {
+    console.log(data)
+    let newU = data.status;
+    let da = data.data;
+    console.log(newU);
+    if(1==newU)
+    {
+      //判断是否有iccid
+      let icc_id = localStorage.getItem('iccid')
+      // localStorage.removeItem('iccid');
+      let gen_re = parseInt(localStorage.getItem('genre'));
+
+      console.log('iccid:' + icc_id);
+      console.log('genre:' + gen_re);
+      if (icc_id != null)
+      {
+
+        if (gen_re ==1) {
+          this.rootPage = ActionPage;
+          this.FreeLoading();
+        }
+        else {
+          this.rootPage = SrechargePage;
+          this.FreeLoading();
+        }
+      }
+      else
+      {
+        //跳转home
+        console.log("data:" + da);
+        this.rootPage =HomePage;
+        this.FreeLoading();
+      }
+      // this.navCtrl.push(HomePage);
+    }
+    else if(0==newU) {
+      this.rootPage = RegisterPage;
+      this.FreeLoading();
+      // this.navCtrl.push(RegisterPage) ;
+    }
+    else if (-1==newU) {
+      this.rootPage = CodePage;
+      this.FreeLoading();
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+  // registerBackButtonAction() {
+  //   this.platform.registerBackButtonAction(() => {
+  //     //如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
+  //     // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive()
+  //     let activePortal = this.ionicApp._modalPortal.getActive();
+  //     if (activePortal) {
+  //       activePortal.dismiss().catch(() => {});
+  //       activePortal.onDidDismiss(() => {});
+  //       return;
+  //     }
+  //     let activeVC = this.nav.getActive();
+  //     let tabs = activeVC.instance.tabs;
+  //     let activeNav = tabs.getSelected();
+  //     return activeNav.canGoBack() ? activeNav.pop() : this.showExit()
+  //   }, 1);
+  // }
+  //
+  // //双击退出提示框
+  // showExit() {
+  //   if (this.backButtonPressed) { //当触发标志为true时，即2秒内双击返回按键则退出APP
+  //     this.platform.exitApp();
+  //   } else {
+  //     this.toastCtrl.create({
+  //       message: '再按一次退出应用',
+  //       duration: 2000,
+  //       position: 'top'
+  //     }).present();
+  //     this.backButtonPressed = true;
+  //     setTimeout(() => this.backButtonPressed = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false
+  //   }
+  // }
+
+
+
+
+
+
+
+
+
+
+  // Init(data)
+  // {
+  //   if (data.ErrorCode == undefined)
+  //   {
+  //     this.Auth.UserId = data.id;
+  //     localStorage.setItem('token', data.token);
+  //
+  //     let uri = "user/" + data.id;
+  //     this.Auth.Get(uri).then(
+  //       UserInfo => this.LoginOK(UserInfo),
+  //       error => console.log(error)
+  //     );
+  //   }
+  //   else
+  //   {
+  //     this.LoginFail(data);
+  //   }
+  // }
+
+  // LoginOK(data)
+  // {
+  //   this.Auth.UserInfo = data;
+  //   this.Start();
+  // }
+  //
+  // LoginFail(data)
+  // {
+  //   console.log(data);
+  //   this.Start();
+  // }
+
+  Start()
+  {
+    this.rootPage = HomePage;
+    this.platform.ready().then(() =>
+      {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+        this.FreeLoading();
+      }
+    );
+  }
+
+  Loading(context="数据加载中", duration=5000)
+  {
+      if (this.loadingCtrl != undefined)
+      {
+          this.loader = this.loadingCtrl.create(
+              {
+                  content: context,
+                  duration: duration
+              }
+          );
+          this.loader.present();
+      }
+  }
+
+  FreeLoading()
+  {
+      if (this.loader != undefined)
+      {
+          this.loader.dismiss();
+      }
+  }
+
+}
+

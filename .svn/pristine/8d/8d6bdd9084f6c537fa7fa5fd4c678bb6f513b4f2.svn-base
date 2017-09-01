@@ -1,0 +1,17 @@
+<ion-content padding>
+  <div id="logo">
+    <h1 style="text-align: center"><img src="assets/icon/logo.png" style="width: 25%;"></h1>
+  </div>
+  <div class="list padding" id="notLogin">
+    <ion-list style="position: relative;">
+      <ion-item>
+        <ion-input type="tel"  [(ngModel)]="Phonenum" maxlength="11" placeholder="手机号码" clearInput></ion-input>
+      </ion-item>
+      <ion-item style="width:60%;position: relative;">
+        <ion-input type="tel"  [(ngModel)]="myCode" maxlength="6" placeholder="验证码" clearInput></ion-input>
+      </ion-item>
+      <button id="code" ion-button round outline (click)="sendcode()" [disabled]="btnname">{{sendbtn}}</button>
+    </ion-list>
+    <button ion-button full round  (click)="Submit()">注册</button>
+  </div>
+</ion-content>

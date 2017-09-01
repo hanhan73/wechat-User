@@ -1,0 +1,7 @@
+<!--<ion-tabs #mainTabs>-->
+  <!--<ion-tab [root]="homeRoot" tabTitle="test" tabIcon="zhifubao" tabsHideOnSubPages></ion-tab>-->
+  <!--<ion-tab [root]="codeRoot" tabTitle="Home" tabIcon="qq" tabsHideOnSubPages></ion-tab>-->
+  <!--<ion-tab [root]="srechargeRoot" tabTitle="demo" tabIcon="apps" tabsHideOnSubPages></ion-tab>-->
+  <!--<ion-tab [root]="registerRoot" tabTitle="我的" tabIcon="person" tabsHideOnSubPages></ion-tab>-->
+  <!--<ion-tab [root]="myshareRoot" tabTitle="我的" tabIcon="person" tabsHideOnSubPages></ion-tab>-->
+<!--</ion-tabs>-->

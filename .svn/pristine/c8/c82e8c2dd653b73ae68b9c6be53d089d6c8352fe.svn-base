@@ -1,0 +1,55 @@
+<ion-content style="background-color: white">
+<img src="assets/icon/Signin/signbg.png">
+    <!--<img style="width: 5rem" src="assets/icon/Signin/qq.png">-->
+    <div class="ring">
+      <ion-label style="margin-top: 23%"><strong>已签到</strong></ion-label>
+      <hr style="background-color: #a97415;margin: 0;margin-left: 16%;width: 70%;"/>
+      <ion-label>连续2天</ion-label>
+    </div>
+  <div class="mylable">
+  <ion-label ><strong>我的积分<i style="color: red;font-size: 1.8rem">{{jifen}}</i></strong></ion-label>
+  <ion-label style="font-size: 1.4rem">积分明细</ion-label>
+  </div>
+  <div class="container">
+    <div class="bar">
+            <span class="bar-unfill" fill>
+              <span class="num"></span>
+              <span class="bar-fill"  [ngStyle]="{'width':jifen/100+'%'}">
+                <span class="num2" ></span>
+              </span>
+            </span>
+    </div>
+  </div>
+  <div class="between">
+  <img src="assets/icon/Signin/calendar.png">
+    <img class="gold" src="assets/icon/Signin/Gold.png">
+    <img class="pen" src="assets/icon/Signin/pen.png">
+
+    <div id="calendar">
+      <span></span>
+        <thead>
+        <tr>
+          <td><i style="color: red">日</i></td>
+          <td>一</td>
+          <td>二</td>
+          <td>三</td>
+          <td>四</td>
+          <td>五</td>
+          <td><i style="color: red">六</i></td>
+        </tr>
+        </thead>
+        <ion-row class="row-wrap" style="width: 78%;">
+          <ion-col   [ngStyle]="coltime(sd)" *ngFor="let sd of sumDay">{{sd}}</ion-col>
+        </ion-row>
+    </div>
+  </div>
+  <div class="di">
+    <ion-label class="dione" style="margin-left: 3.5rem;font-size: 1.6rem">——————  <strong>签到攻略</strong>  ——————</ion-label>
+    <ion-label>1.每日签到奖励积分<span>5积分</span>,连续签到7日有额外奖励 <span>50积分</span></ion-label>
+    <ion-label>2.活动日签到奖励积分<span>随机翻倍</span></ion-label>
+    <ion-label>3.每月全勤签到额外奖励<span>200积分</span></ion-label>
+    <ion-label>4.消耗积分可参与抽奖活动，也可以兑换流量(1积分=1MB流量),</ion-label>
+    <ion-label>满<span>100/200/300/500</span>积分时可一键兑换</ion-label>
+    <ion-label>5.积分每月1日自动清零</ion-label>
+  </div>
+</ion-content>

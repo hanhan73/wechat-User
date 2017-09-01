@@ -1,0 +1,111 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TopupService } from '../services';
+
+@Component({
+  selector: 'page-topup',
+  templateUrl: 'topup.html'
+})
+export class TopupPage extends TCommonPage
+{
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    public alertCtrl:AlertController,
+    public service: TopupService)
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+    this.iccid= navParams.get('item');
+
+    this.service.GetOrderList(this.iccid).then(
+      data => this.SetOrderlist(data),
+      error => console.log(error)
+    );
+  }
+
+  ionViewDidLoad()
+  {
+    console.log('ionViewDidLoad TopupPage');
+  }
+
+  SetOrderlist(data) 
+  {
+    console.log(data);
+    if (data.status == 1) 
+    {
+      this.good_items = data.data;
+    }
+    else if (data.status == 0) 
+    {
+      console.log(data.msg);
+    }
+
+  }
+
+  // ChangeOrder(ob){
+  //   if ( ob.mode==1 ) {
+  //     this.money=(ob.price*ob.discount)/100/100;
+  //   }
+  //   else {
+  //     this.money=ob.price/100;
+  //   }
+
+  //   this.oid=ob.id;
+  //   console.log(this.oid);
+  //   let prompt = this.alertCtrl.create({
+  //     title: '充值详情',
+  //     message:"您将订购价值"+this.money+"元的"+(ob.flow_size)/1024+"G流量套餐",
+  //     buttons: [
+  //       {
+  //         text:'确认支付',
+  //         handler: data => {
+  //           this.wetpay();
+  //         },
+  //        cssClass: 'alertbuttn'
+  //       }
+  //     ]
+  //   })
+  //   prompt.present();
+  // }
+  // //充值
+  // wetpay(){
+  //   /**
+  //    * 创建充值订单 iccid  套餐ID  价格 类型1
+  //    */
+  //   this.order.CreateOrder(
+  //     this.iccid,this.oid,this.money*100
+  //   ).then(
+  //     data => this.wetpayF(data),
+  //     error =>console.log(error)
+  //   )
+
+  // }
+
+  // wetpayF(data){
+  //   let s=data.status;
+  //   if (s==1) {
+  //     //创建订单成功
+  //     //支付
+  //     this.weiItem=data.data;
+  //     console.log(this.weiItem)
+  //     this.top.ToPay(this.weiItem);
+  //   }
+  //   else {
+  //     console.log(data.status)
+  //     console.log('打印创建订单错误：')
+  //     console.log(data.msg)
+  //   }
+  // }
+
+  private iccid;
+  private good_items;
+
+  money;
+  oid;
+  testlable: '新用户首次充值专享优惠';
+  private weiItem;  
+}

@@ -1,0 +1,98 @@
+page-home {
+  *{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    //font-family: "HiraginoSansGB W3";
+  }
+  button{
+    width: 35%;
+    color: white;
+  }
+  .button-outline-md{
+    border-color:white;
+    color: white;
+    margin-left: 60%;
+  }
+  ion-icon{
+    font-size: 50px;
+  }
+  .he{
+    width: 100%;
+    margin: 0px;
+    height: 64px;
+    background-color: #15a6ff;
+    position:relative;
+  }
+  .top{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    margin-top: 5px;
+  }
+
+  .info{
+    position: absolute;
+    margin-left: 50px;
+    font-size: 15px;
+    color: white;
+  }
+  h2{
+    line-height: 24px;
+  }
+  //滑动div样式
+  ion-slide {
+    position: relative;
+  }
+  ion-icon{
+    position: absolute;
+    font-size: 50px;
+    color:#8c8c8c;
+    z-index: 1;
+  }
+  #left{
+    margin-top: -25%;
+  }
+  #right{
+    margin-top: -25%;
+    margin-left: 87%;
+  }
+  .input{
+    width: 275px;
+    margin: auto;
+  }
+  .flow{
+    width: 50%;
+
+  }
+  ion-grid{
+    color: #4d4d4d;
+  }
+  ion-col{
+    color: white;
+    height: 120px;
+    border:none;
+    border-right: 2px solid  #e9e9e9;
+    border-bottom: 2px solid  #e9e9e9 ;
+  }
+  ion-col img{
+    width: 56%;height: 61%;margin-left: 25%;margin-top: 10%;
+  }
+  .gridlable{
+    font-family: 'HiraginoSansGB W3';
+    color: #2d2d2d ;
+    font-size: 12px;
+    margin-left: 28%;
+    margin-top: 0%;
+
+  }
+  .shop{
+    font-family: 'HiraginoSansGB W3';
+    color: #2d2d2d ;
+    font-size: 12px;
+    margin-left:40%;
+    margin-top: 0%;
+  }
+
+
+}

@@ -1,0 +1,234 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {NavController, AlertController,ToastController} from 'ionic-angular';
+import { RegisterPage } from '../register/register';
+import { SigninPage } from '../signin/signin'
+// import { TopupPage } from '../topup/topup';
+// import { TopupRecordPage } from '../topup-record/topup-record';
+// import { DeliveryRecordPage } from '../delivery-record/delivery-record';
+import { OrderInfoPage } from '../order-info/order-info';
+import { TAuth } from '../services';
+import { RechargePage } from '../recharge/recharge';
+import { OrderPage } from '../order/order';
+import {error} from "jweixin";
+import { SrechargePage } from '../srecharge/srecharge'
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage implements OnInit, OnDestroy
+{
+  Username:string;
+  point:number;
+  imsrc:string;
+  time:number;
+  signDis:boolean;
+  sliderstatus;
+  constructor(public auth: TAuth, public navCtrl: NavController,public toast :ToastController,public alertCtrl:AlertController)
+  {
+    console.log('created in');
+    this.Init();
+  }
+  /**
+   * 初始化 用户信息
+   *====================================================================================================================
+   */
+  Init()
+  {
+    this.auth.IfNewUser().then(
+      data =>this.UserInfo(data),
+      error => console.log(error)
+    )
+  }
+
+  UserInfo(data){
+    console.log(data);
+    let status=data.status;
+      if(0==status){
+        this.navCtrl.push(RegisterPage);
+        }
+        else if (1==status){
+          this.auth.login().then(
+            data => {
+              localStorage.setItem('token',data.token)
+              this.auth.Device().then(
+                data =>this.Bydevice(data),
+                error =>console.log(error)
+              );
+            },
+            error =>console.log(error)
+          );
+          this.Userdata=data.data;
+          this.Username=this.Userdata.nick_name;
+          this.point=this.Userdata.credit;
+          this.imsrc=this.Userdata.headimg;
+          this.time=this.Userdata.mark;
+          console.log(this.time);
+            if(1==this.time){
+              this.signDis=true;
+            }
+            else if(0==this.time){
+              this.signDis=false;
+              return;
+            }
+        }
+  }
+  /**
+   *签到
+   * ==========================================================================================
+   */
+  sign(){
+    this.auth.Sign().then(
+      data =>
+        (     console.log(data.status),
+              console.log(data.msg),
+              this.Ifsign(data)
+        ),
+      error=> console.log(error)
+    )
+  }
+
+  Ifsign(data){
+    let sta=data.status;
+    if (1==sta){
+      this.signDis=true;
+      this.navCtrl.push(SigninPage,{point:this.point})
+      //this.showAlert(data.msg);
+     this.Init();
+    }else if(0==sta){
+      this.auth.presentToast(data);
+      this.signDis=false;
+    }
+  }
+
+  SignIt()
+  {
+    this.navCtrl.push(SigninPage, {point: this.point})
+  }
+  btnstatus;//按钮出现的状态
+  /**
+   * 初始化 上次绑定过iccid
+   *====================================================================================================================
+   */
+  Bydevice(data){
+    let sa=data.status;
+    console.log(data)
+    if (1==sa){
+      this.deviceInfo=data.data;
+      if (this.deviceInfo=='' || this.deviceInfo==undefined){
+        this.btnstatus=1;
+      }
+      console.log(this.btnstatus)
+    }else {
+      this.btnstatus=1;
+      console.log(sa+'===='+data.msg)
+    }
+    console.log(this.deviceInfo);
+  }
+  private deviceInfo;
+  /**
+   *====================================================================================================================
+   */
+  gorecharge(){
+    console.log('点我了');
+    // this.navCtrl.push(RechargePage,{
+    //   item1:'ios-rechargePage'
+    // });
+  }
+  presentToast(name) {
+    let toast = this.toast.create({
+      message: name+'还在维护，敬请期待。',
+      duration: 3000
+    });
+    toast.present();
+  }
+  // showAlert( name){
+  //   let alert=this.alertCtrl.create({
+  //     title:name,
+  //     buttons:['ok']
+  //   });
+  //   alert.present();
+  // }
+  /**
+   * 解除绑定
+   *====================================================================================================================
+   */
+  offitem;
+  offdevice(id){
+      this.auth.login();
+    this.auth.Device(id).then(
+      data =>this.ofFinsh(data),
+      error =>console.log(error)
+    )
+
+  }
+  ofFinsh(data){
+    this.offitem=data;
+    console.log(this.offitem.status)
+    if(this.offitem.status==1){
+      this.auth.presentToast(null,'解除成功！');
+      this.Init();
+    }else if (this.offitem.status==0){
+      this.auth.presentToast(null,'解除失败！');
+      console.log(this.offitem.msg);
+    }
+  }
+  /**
+   *====================================================================================================================
+   */
+  /*
+  跳转充值记录页面
+   */
+  ToRecharge(){
+    this.navCtrl.push(RechargePage);
+  }
+  /*
+  跳转充值页面
+   */
+  createorder(iccid){
+
+    this.navCtrl.push(OrderPage,{item:iccid});
+  }
+  /*
+  跳转充值查询页面
+   */
+  toselectpage(){
+
+      this.navCtrl.push(SrechargePage);
+
+  }
+
+  /**
+   *====================================================================================================================
+   */
+  ngOnInit(): void
+  {
+    console.log(this.UserInfo);
+  }
+
+  ngOnDestroy(): void
+  {
+    return;
+  }
+
+  ionViewDidLoad()
+  {
+  }
+
+  // ionViewWillEnter()
+  // {
+  //   console.log('view will enter!');
+  //   if (!this.InitData())
+  //   {
+  //     console.log('not init data...')
+  //     return;
+  //   }
+  //
+
+
+  OpenOrder(order_no)
+  {
+    this.navCtrl.push(OrderInfoPage, {item: order_no});
+  }
+
+  private Userdata;
+}

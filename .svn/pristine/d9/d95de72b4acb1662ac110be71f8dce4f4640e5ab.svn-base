@@ -1,0 +1,44 @@
+/**
+ * Created by Administrator on 2017/8/10/010.
+ */
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { TBasicService } from '../providers/basic-service';
+import { TAuth } from '../providers/auth';
+
+@Injectable()
+export class OrderService extends TBasicService {
+  constructor(public http: Http, public auth: TAuth) {
+    super(http);
+  }
+
+  /**
+   * 充值页面
+   * OrderPage页面
+   * ================================================================================================================
+   */
+  /*
+   获取充值项目
+   */
+  GetOrderList(iccid) {
+    console.log(iccid);
+    let data = {};
+    data['iccid'] = iccid;
+    console.log('this is GetOrderList');
+    return this.Put(data,'wx_price_list')
+
+  }
+  /*
+   创建充值订单
+   */
+  CreateOrder(iccid,id,price) {
+    console.log('this is GetOrderList');
+    let data = {};
+    data['iccid'] = iccid;
+    data['openid'] = this.auth.openid;
+    data['price_list_id'] = id;
+    data['price'] = price;
+    return this.Post(data,'recharge');
+
+  }
+}

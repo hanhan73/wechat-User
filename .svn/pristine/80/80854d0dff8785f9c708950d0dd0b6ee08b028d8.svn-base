@@ -1,0 +1,56 @@
+<ion-header style="height: 25% ;background: linear-gradient(#1898E3, #67B7ED)" >
+
+
+  <ion-label >已使用流量/剩余流量  :<span>2048M/<i style="color:#FF9923">1024M</i></span></ion-label>
+  <ion-label >已使用时间/剩余使用时间  :<span style="margin-left: 2%">100天/<i style="color:#FF3900">78天</i></span></ion-label>
+
+  <ion-item style="border-radius: 35px;color:#9D9D9D;width: 70%;margin-left: 5%;padding-top: -2px;height: 2.9rem">
+    <ion-input type="type" maxlength="19" placeholder="请输入ICCID" [(ngModel)]="numCard" ></ion-input>
+  </ion-item>
+  <button ion-button round class="srsearch" (click)="Bycard()">搜索</button>
+</ion-header>
+<ion-content>
+<ion-card *ngIf="CardInfo">
+  <ion-grid >
+    <ion-row>
+      <ion-col >ICCID</ion-col>
+      <ion-col >{{CardInfo.iccid}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >状态</ion-col>
+      <ion-col>{{CardInfo.status}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >运营商</ion-col>
+      <ion-col>电信</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >套餐</ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >已使用流量</ion-col>
+      <ion-col>{{CardInfo.used_flow}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >剩余流量</ion-col>
+      <ion-col>{{CardInfo.total_flow-CardInfo.used_flow}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >已使用时间</ion-col>
+      <ion-col>{{CardInfo.delivery_time}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >剩余使用时间</ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-label class="lab2">查询结果及充值可能稍有延迟， 请耐心等待</ion-label>
+  <ion-label class="lab2">点击绑定可将流量卡<i style="color:red">绑定至个人中心</i></ion-label>
+  <button ion-button round primary (click)="Todevice()">绑定</button>
+  <button ion-button round primary  outline (click)="ToOrder()">充值</button>
+  </ion-card>
+  <div *ngIf="bgs" style="width: 100%; height: 100%;background: linear-gradient(#67B7ED, #67B7ED)">
+  </div>
+  <!--<img src="assets/icon/SR/xring.gif">-->
+</ion-content>

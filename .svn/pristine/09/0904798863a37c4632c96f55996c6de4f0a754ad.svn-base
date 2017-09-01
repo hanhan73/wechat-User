@@ -1,0 +1,85 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { TBasicService } from '../providers/basic-service';
+//import * as wx from 'jweixin';
+
+//npm install jweixin -s
+//npm install @types/jweixin -D
+//ionic build brower --prov
+//cordova platform add brower
+
+@Injectable()
+export class TopupService extends TBasicService
+{
+  constructor(public http: Http) 
+  {    
+    super(http);
+
+    // let jsApiList = [];
+    // jsApiList.push('chooseWXPay');
+
+    // let conf = {      
+    //   "appId": '234234', // 必填，公众号的唯一标识
+    //   "timestamp": 124422224, // 必填，生成签名的时间戳
+    //   "nonceStr": '22234234', // 必填，生成签名的随机串
+    //   "signature": '234234234', // 必填，签名，见附录1
+    //   "jsApiList": jsApiList // 必填，需要使用的JS接口列表，所有JS接口列表见附录2    
+    // };  
+    
+    // wx.config(conf);    
+  }
+
+  GetGoodItems()
+  {
+    return this.Get('topup_item');
+  }
+
+  pay(data)
+  {
+    /*
+      "appId" : appId,
+      "timeStamp": timeStamp,
+      "nonceStr" : nonceStr,
+      "package" : "prepay_id=" + pg,
+      "signType" : "MD5",
+      "paySign" : paySign
+    
+    */
+
+    
+    // if (data.result_code == "SUCCESS")    
+    // {      
+      
+    //   let param: wx.IchooseWXPay;
+    //   param.timestamp = data.time_stamp;
+    //   param.nonceStr = data.nonce_str;
+    //   param.package = "parepay_id=" + data.prepay_id;
+    //   param.signType = "MD5";
+    //   param.paySign = data.pay_sign;
+
+    //   wx.chooseWXPay(param);
+    // }
+    
+  }
+
+  Topup(openid, order_value, pay_value)
+  {
+    let param = {
+      "openid": openid,
+      "order_value": order_value,
+      "pay_value": pay_value
+    };
+
+    return this.Post(param, 'merchant_new_order');
+  }
+
+  TopupRecord(customer_id, dt)
+  {
+    let param = {
+      "customer_id": customer_id,
+      "dt": dt
+    };
+
+    return this.Post(param, 'merchant_topup_record');
+  }
+}

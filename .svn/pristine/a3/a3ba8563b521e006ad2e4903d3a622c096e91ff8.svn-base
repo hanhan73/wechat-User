@@ -1,0 +1,69 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { TBasicService } from '../providers/basic-service';
+
+@Injectable()
+export class DeliveryService extends TBasicService
+{
+  constructor(public http: Http) 
+  {
+    super(http);
+  }
+
+  DeliverRecord(customer_id, dt)
+  {
+    let param = {
+      "customer_id": customer_id,
+      "dt": dt
+    };
+
+    return this.Post(param, 'rider_delivery_record');    
+  }
+
+  DeliverRecord2(customer_id, dt)
+  {
+    let param = {
+      "customer_id": customer_id,
+      "dt": dt
+    };
+
+    return this.Post(param, 'merchant_delivery_record');
+  }
+
+  OpenOrder(order_no)
+  {
+    let param = {
+      "order_no": order_no
+    };
+    
+    return this.Post(param, 'merchant_open_order');
+  }
+
+  RobOrder(order_no)
+  {
+    let param = {
+      "order_no": order_no
+    };
+    
+    return this.Put(param, 'rider_order');
+  }
+
+  SubmitOrder(order_no)
+  {
+    let param = {
+      "order_no": order_no
+    };
+    
+    return this.Post(param, 'rider_order');
+  }
+
+  CancelOrder(order_no)
+  {
+    let param = {
+      "order_no": order_no
+    };
+    
+    return this.Post(param, 'rider_cancel_order');
+  }
+  
+}

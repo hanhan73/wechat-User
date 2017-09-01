@@ -1,0 +1,11 @@
+<ion-content *ngIf="actionItem">
+<img src="assets/icon/action/actioblue.png" style="width: 100%;z-index: -1;">
+  <ion-label class="actionone">支付激活设备，畅享智慧生活</ion-label>
+  <i class="actionrmb">{{actionItem.price/100}}元</i>
+  <ion-label class="actiontwo">内含{{(actionItem.sub_good_type==0)?(actionItem.flow_size/1024):(actionItem.flow_size)}}
+  <span *ngIf="actionItem.sub_good_type == 0">G流量套餐</span>
+    <span *ngIf="actionItem.sub_good_type !=0">个月无限套餐</span>
+  </ion-label>
+
+  <button class="action_btn" ion-button (click)="ActionPay()">立即支付</button>
+</ion-content>

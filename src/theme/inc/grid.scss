@@ -1,0 +1,33 @@
+ion-row{
+    ion-col{
+        &[col-label]{
+            p{
+                label{
+                    display: inline-block;
+                    text-align:right;
+                    min-width:60px;
+                    margin-right:10px;
+                    color:#5a8da5;
+                }
+            }
+            
+        }
+        &[label]{
+            
+           label{
+               display: inline-block;
+               text-align:right;
+               margin-right:10px;
+               min-width:60px;
+               color:darken(color($colors,light,base),35%);
+           } 
+           p{
+               &:first-child{
+                   margin-top:10px;
+               }
+                font-size:1.2rem;
+                margin-bottom:10px;
+           }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { DeliveryRecordPage } from '../pages/delivery-record/delivery-record';
+import { TopupPage } from '../pages/topup/topup';
+import { TopupRecordPage } from '../pages/topup-record/topup-record';
+import { RegisterPage } from '../pages/register/register';
+import { CodePage } from '../pages/code/code';
+import { RechargePage } from '../pages/recharge/recharge';
+import { OrderInfoPage } from '../pages/order-info/order-info';
+import { TBasicService } from '../providers/basic-service';
+import { TAuth } from '../providers/auth';
+import { HomeService } from '../providers/home-service';
+import { TopupService } from '../providers/topup-service';
+import { DeliveryService } from '../providers/delivery-service';
+
+
+@NgModule({
+  declarations: [
+    MyApp,
+    HomePage,
+    DeliveryRecordPage,
+    TopupPage,
+    TopupRecordPage,
+    RegisterPage,
+    CodePage,
+    OrderInfoPage,
+    RechargePage
+  ],
+  imports: [
+    HttpModule,
+    BrowserModule,
+    IonicModule.forRoot(MyApp,{
+      backButtonText: '',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition'
+    })
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    HomePage,
+    DeliveryRecordPage,
+    TopupPage,
+    TopupRecordPage,
+    RegisterPage,
+    CodePage,
+    RechargePage,
+    OrderInfoPage
+  ],
+  providers: [
+    TBasicService,
+    TAuth,
+    HomeService,
+    TopupService,
+    DeliveryService,
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
+})
+export class AppModule {}

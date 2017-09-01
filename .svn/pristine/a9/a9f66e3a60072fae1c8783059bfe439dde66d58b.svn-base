@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>充值</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding >
+  <div *ngIf="inited()">
+    <ion-row>
+      <ion-col col-4 *ngFor="let item of items">
+        <button ion-button block outline color="success" (click)="topup(item)">{{item.display_name}}</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

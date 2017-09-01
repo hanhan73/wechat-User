@@ -1,0 +1,30 @@
+import { Component ,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams ,Tabs} from 'ionic-angular';
+/**
+ * Generated class for the TabpagePage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+// @IonicPage()
+@Component({
+  selector: 'page-tabpage',
+  templateUrl: 'tabpage.html',
+})
+export class TabpagePage {
+
+  // @ViewChild('mainTabs') tabs:Tabs;
+  // homeRoot: any = HomePage;
+  // codeRoot: any = CodePage;
+  // srechargeRoot: any = SrechargePage;
+  // registerRoot: any = RegisterPage;
+  // myshareRoot: any = MysharePage;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad TabpagePage');
+  }
+
+}

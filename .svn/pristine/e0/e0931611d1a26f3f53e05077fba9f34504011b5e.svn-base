@@ -1,0 +1,131 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { DeliveryService, TAuth } from '../services';
+
+@Component({
+  selector: 'page-order-info',
+  templateUrl: 'order-info.html'
+})
+
+export class OrderInfoPage extends TCommonPage
+{
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public loadingCtrl: LoadingController, 
+    public toastCtrl: ToastController,
+    public service: DeliveryService,
+    public auth: TAuth) 
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+    this.order_no = navParams.get('item');
+
+    this.ReadOnly = auth.UserInfo.role_type == 0;
+  }  
+
+
+  ionViewDidLoad() 
+  {
+    this.RefreshOrder();
+    console.log('ionViewDidLoad OrderInfoPage');
+  }
+
+  RefreshOrder()
+  {
+    this.service.OpenOrder(this.order_no).then(
+      data => this.SetData(data),
+      error => console.log(error)      
+    );    
+  }
+  
+  SetData(data)
+  {
+    console.log(data);
+    this.data = data;
+
+    if (data.delivery_info == undefined)
+    {
+      return;
+    }
+
+    if (!this.Inited())
+    {
+      this.ActionType = 0;
+      return;
+    }
+
+    if (this.data.delivery_info.delivery_time != undefined)
+    {
+      this.ActionType = 3; //已配送
+      return;
+    }
+
+    if (this.data.delivery_info.get_time != undefined)
+    {
+      this.ActionType = 2; //已抢单
+    }
+    else
+    {
+      this.ActionType = 1; //未抢单
+    }
+
+  }
+
+  Inited()
+  {
+    return this.data != undefined;
+  }
+
+  ToDelivery()
+  {
+    this.Loading('请求数据中...');
+    this.service.RobOrder(this.order_no).then(
+      data => this.AfterDelivery(data),
+      error => console.log(error)
+    );
+    
+  }
+
+  CancelDeliver()
+  {
+    console.log('cancel delivery');
+  }
+
+  SubmitDeliver()
+  {
+      this.service.SubmitOrder(this.order_no).then(
+        data => this.AfterDelivery(data),
+        error => console.log(error)
+      );
+  }
+
+  AfterDelivery(data)
+  {
+    console.log(data);
+    if (data.success == 0)
+    {
+      if (this.ActionType == 1)
+      {
+        this.ShowToast(data.msg);
+      }
+      else
+      {
+        this.ShowToast('递交成功!');
+      }
+      
+    }
+    else
+    {
+      this.ShowToast(data.msg);
+    }
+
+    this.FreeLoading();
+  }
+
+  private data;
+  private ActionType = 0;
+  private order_no;
+  private ReadOnly = false;
+}

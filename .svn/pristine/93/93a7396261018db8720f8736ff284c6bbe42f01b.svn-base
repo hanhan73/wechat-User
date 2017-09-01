@@ -1,0 +1,242 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {NavController, AlertController} from 'ionic-angular';
+import { RegisterPage } from '../register/register';
+import { TopupPage } from '../topup/topup';
+import { TopupRecordPage } from '../topup-record/topup-record';
+import { DeliveryRecordPage } from '../delivery-record/delivery-record';
+import { OrderInfoPage } from '../order-info/order-info';
+import { TAuth } from '../services';
+import {error} from "jweixin";
+import {timeInterval} from "rxjs/operator/timeInterval";
+import {const_data} from "../../common/application-const";
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage implements OnInit, OnDestroy
+{
+  Username:string;
+  point:number;
+  imsrc:string;
+  time:number;
+  signDis:boolean;
+  constructor(public auth: TAuth, public navCtrl: NavController,public alertCtrl:AlertController)
+  {
+    // if (!this.InitData())
+    // {
+    //
+    // }
+    this.auth.IfNewUser().then(
+      data =>this.UserInfo(data),
+      error => console.log(error)
+    )
+  }
+  UserInfo(data){
+    console.log(data);
+    let status=data.status;
+    if(0==status){
+      this.navCtrl.push(RegisterPage);
+    }else if (1==status){
+    this.Userdata=data.data;
+    this.Username=this.Userdata.nick_name;
+    this.point=this.Userdata.credit;
+    this.imsrc=this.Userdata.headimg;
+    this.time=this.Userdata.mark;
+    console.log(this.time);
+    if(1==this.time){
+      this.signDis=true;
+    }else if(0==this.time){
+      this.signDis=false;
+      return;
+    }
+    }
+  }
+  sign(){
+    this.auth.Sign().then(
+      data =>
+        (     console.log(data.status),
+              console.log(data.msg),
+              this.Ifsign(data)
+        ),
+      error=> console.log(error)
+    )
+  }
+  Ifsign(data){
+    let sta=data.status;
+    if (1==sta){
+      this.signDis=true;
+      this.showAlert(data.msg);
+      this.auth.IfNewUser().then(
+        data =>this.UserInfo(data),
+        error => console.log(error)
+      )
+    }else if(0==sta){
+      this.showAlert(data.msg);
+      this.signDis=false;
+    }
+  }
+  /*
+  input 绑定设备调用方法
+   */
+  /*
+  初始化 上次绑定过iccid  就直接显示在上面
+   */
+  gorecharge(){
+    console.log('点我了');
+    // this.navCtrl.push(RechargePage,{
+    //   item1:'ios-rechargePage'
+    // });
+  }
+  showAlert( name){
+    let alert=this.alertCtrl.create({
+      title:name,
+      buttons:['ok']
+    });
+    alert.present();
+  }
+  ngOnInit(): void
+  {
+    console.log(this.UserInfo);
+  }
+
+  ngOnDestroy(): void
+  {
+    return;
+  }
+
+  ionViewDidLoad()
+  {
+    // if (!this.InitData())
+    // {
+    //   return;
+    // }
+
+    // if (this.GetRoleType() < 0)
+    // {
+    //   this.auth.Reged = false;
+    //   this.ResisgerUser();
+    // }
+  }
+
+  // ionViewWillEnter()
+  // {
+  //   console.log('view will enter!');
+  //   if (!this.InitData())
+  //   {
+  //     console.log('not init data...')
+  //     return;
+  //   }
+  //
+  //
+  //   let role_type = this.GetRoleType();
+  //   if (role_type < 0)
+  //   {
+  //     if (this.auth.Reged)
+  //     {
+  //       this.UserInfo = this.auth.UserInfo;
+  //       this.InitMenus(this.UserInfo.role_type);
+  //       this.auth.Reged = false;
+  //     }
+  //     else
+  //     {
+  //       this.auth.Reged = false;
+  //       this.ResisgerUser();
+  //     }
+  //   }
+  //   else if (this.MenuItems == undefined)
+  //   {
+  //     this.InitMenus(role_type);
+  //
+  //     if (this.auth.state.length > 5)
+  //     {
+  //       this.OpenOrder(this.auth.state);
+  //     }
+  //   }
+  // }
+
+  InitMenus(RoleType)
+  {
+    this.MenuItems = [
+      {
+        'title': '配送记录',
+        'icon': '&#xf315;',
+        'tag': 0,
+        'color': '#58b969'
+      }];
+
+    if (RoleType == 0)
+    {
+      this.title = '商家中心';
+      this.role_name = '商家';
+      this.MenuItems.push
+      (
+        {
+          'title': '充值记录',
+          'icon': '&#xf2b1;',
+          'tag': 1,
+          'color': '#FFD439'
+        }
+      );
+    }
+
+    this.role_type = RoleType;
+  }
+
+  OpenItem(item)
+  {
+    switch(item.tag)
+    {
+      case 0:
+        this.navCtrl.push(DeliveryRecordPage, {item: this.UserInfo});
+        break;
+      case 1:
+        this.navCtrl.push(TopupRecordPage, {item: this.UserInfo});
+        break;
+      default:
+        console.log('invalid item object');
+    }
+
+  }
+
+  // topup()
+  // {
+  //   this.navCtrl.push(TopupPage, {item: this.UserInfo});
+  // }
+  //
+  // ResisgerUser()
+  // {
+  //   this.navCtrl.push(RegisterPage, {item: this.UserInfo});
+  // }
+  //
+  // InitData(): Boolean
+  // {
+  //   return this.UserInfo != undefined;
+  // }
+
+  // GetRoleType(): any
+  // {
+  //   let result = -1;
+  //   if (this.UserInfo != undefined)
+  //   {
+  //     if (this.UserInfo.role_type != undefined)
+  //     {
+  //       result = this.UserInfo.role_type;
+  //     }
+  //   }
+  //
+  //   return result;
+  // }
+
+  OpenOrder(order_no)
+  {
+    this.navCtrl.push(OrderInfoPage, {item: order_no});
+  }
+
+  private Userdata;
+
+  private MenuItems;
+  private title = '骑手中心';
+  private role_name = '骑手';
+  private role_type;
+}

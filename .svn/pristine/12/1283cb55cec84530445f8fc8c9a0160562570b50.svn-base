@@ -1,0 +1,11 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/Emeryao/typed-jweixin/master/typings.json",
+    "raw": "github:Emeryao/typed-jweixin",
+    "main": "jweixin.d.ts",
+    "version": "1.1.0",
+    "global": true,
+    "name": "jweixin"
+  }
+}

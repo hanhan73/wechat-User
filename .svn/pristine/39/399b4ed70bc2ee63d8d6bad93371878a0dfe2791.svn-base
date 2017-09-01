@@ -1,0 +1,12 @@
+page-register {
+  *{
+    padding: 0;
+    margin: 0;
+  }
+#code{
+  position: absolute;
+  right: 0;
+  top:52px;
+  //margin-top:-11%;
+}
+}

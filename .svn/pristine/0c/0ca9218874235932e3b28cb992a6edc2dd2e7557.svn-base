@@ -1,0 +1,71 @@
+<ion-content padding>
+  <ion-list>
+    <ion-item class="he">
+      <h1 ><img class="top" src="assets/icon/return.svg" ></h1>
+      <div class="info">
+        <h2 class="h2">昵称: {{username}}</h2>
+        <h2 class="h2">积分： {{integral}}</h2>
+      </div>
+      <button  ion-button   round outline  (click)="sign()">签到领积分</button>
+    </ion-item>
+    <ion-slides style="height: 128px;" >
+      <ion-slide >
+        <ion-item class="input">
+          <ion-label fixed>ICCID</ion-label>
+          <ion-input type="text" value="" (click)="binding()"></ion-input>
+        </ion-item>
+        <ion-label class="flow">当前流量： </ion-label>
+
+      </ion-slide>
+
+      <ion-slide  >
+        <ion-item class="input">
+          <ion-label fixed>ICCID</ion-label>
+          <ion-input type="text" value="" (click)="binding()"></ion-input>
+        </ion-item>
+        <ion-label class="flow">当前流量：</ion-label>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-item class="input">
+          <ion-label fixed>ICCID</ion-label>
+          <ion-input type="text" value="" (click)="binding()"></ion-input>
+        </ion-item>
+        <ion-label class="flow"> 当前流量：</ion-label>
+      </ion-slide>
+    </ion-slides>
+    <ion-icon id="left" name="ios-arrow-back" ></ion-icon>
+    <ion-icon id="right" name="ios-arrow-forward" ></ion-icon>
+    <hr style="height:4px;border:none;border-top:0px solid #8c8c8c;" />
+    <ion-grid >
+      <ion-row>
+        <ion-col width-20 style="display: block" (click)="showAlert('充值记录')" >
+          <img src="assets/icon/recharge.svg">
+          <ion-label class="gridlable" >充值记录</ion-label>
+        </ion-col>
+        <ion-col width-20 (click)="showAlert('消费记录')">
+          <img src="assets/icon/consumption.svg">
+          <ion-label class="gridlable">消费记录</ion-label>
+        </ion-col>
+        <ion-col width-20 (click)="showAlert('我的车机')">
+          <img src="assets/icon/C-CAR.svg" >
+          <ion-label class="gridlable">我的车机</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-20 (click)="showAlert('我的相机')">
+          <img src="assets/icon/photograph.svg">
+          <ion-label class="gridlable">我的相机</ion-label>
+        </ion-col>
+        <ion-col width-20 (click)="showAlert('热销商品')">
+          <img src="assets/icon/hot.svg">
+          <ion-label class="gridlable">热销商品</ion-label>
+        </ion-col>
+        <ion-col width-20 (click)="showAlert('商城')">
+          <img src="assets/icon/shop.svg">
+          <ion-label class="shop">商城</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

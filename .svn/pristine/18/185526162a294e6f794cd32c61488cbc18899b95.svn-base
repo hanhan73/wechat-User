@@ -1,0 +1,76 @@
+<ion-content no-padding>
+  <ion-row class="header-item">
+    <div class="bg-img">
+       <div class="slide-size">
+        <ion-slides pager class="slide-device" (ionSlideDidChange)="slideChanged()">
+          <ion-slide *ngIf="!HasbindedDevice()" style="width: 100%;height: 100%">
+             <ion-row class="card">
+              <div class="card-round">
+                <div class="head-content">
+                  <img class="portrait" [src]="MyPortrait" [class.animation-img]="played">
+                  <div class="sign-btn" [class.animation-img]="played">
+                    <div class="button-label" (click)="Sign()">{{SignBtnName}}</div>
+                  </div>
+                </div>
+                <div class="background-img">
+                   <div class="error-content">
+                     <img class="character" src="assets/home/character.png">
+                     <div class="message">
+                       <div class="round">您还未绑定流量卡,绑定后查询信息更便捷!</div>
+                     </div>
+                     <div class="query-content">
+                       <button ion-button color=self-orange class="query-button" (click)="OpenSearchPage()">查询充值</button>
+                     </div>
+                  </div>
+                </div>
+              </div>
+             </ion-row>
+          </ion-slide>
+
+          <ion-slide *ngFor="let item of deviceInfo">
+             <ion-row class="card">
+              <div class="card-round">
+                <div class="head-content">
+                  <img class="portrait" [src]="MyPortrait" [class.animation-img]="played">
+                  <div class="sign-btn" [class.animation-img]="played">
+                    <div class="button-label" (click)="Sign()">{{SignBtnName}}</div>
+                  </div>
+                </div>
+
+                <div class="background-img">
+                   <div class="content">
+                    <div class="iccid">{{item.detail.iccid}}</div>
+                    <div class="left-flow">
+                      <ion-label>剩余流量:{{GetDeviceFlow(item) }}</ion-label>
+                      <button ion-button color=self-orange2 style="height: 2rem" (click)="BindingDevice(item.id)">解绑</button>
+                      <button ion-button color=self-orange style="height: 2rem" (click)="OpenChargePage(item.iccid)">充值</button>
+                      <!--<button ion-button color=self-orange style="height: 2rem" (click)="OpenTopupPage(item.iccid)">充值2</button>-->
+                    </div>
+                    <div class="left-day">剩余有效期：10天</div>
+                  </div>
+                </div>
+              </div>
+             </ion-row>
+          </ion-slide>
+        </ion-slides>
+       </div>
+    </div>
+  </ion-row>
+
+  <div><!--广告-->
+    <ion-slides>
+      <ion-slide>
+        <img src="assets/icon/20170707120239.png">
+      </ion-slide>
+    </ion-slides>    
+  </div>
+  <div><!--九宫格功能模块-->
+    <!--<ion-input type="text" placeHolder="test" [(ngModel)]="input_text" (ionChange)="inputChanged($event)"></ion-input>-->
+    <ion-row>
+      <ion-col col-3 class="func-content" *ngFor="let item of FuncItems" (click)="FuncItemClick(item)">
+        <div class="img"><img src="{{item.src}}"></div>
+        <div class="title">{{item.name}}</div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

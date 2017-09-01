@@ -1,0 +1,77 @@
+/**
+ * Created by Administrator on 2017/7/5/005.
+ */
+import { Component ,ViewChild } from '@angular/core';
+import { NavController, NavParams,Slides} from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TAuth } from '../services';
+import { error } from "jweixin";
+@Component({
+  selector: 'page-recharge',
+  templateUrl: 'recharge.html'
+})
+
+export class RechargePage extends TCommonPage
+{
+  @ViewChild(Slides) slides: Slides;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    public auth: TAuth)
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+    this.auth.login().then(
+      data => {
+        localStorage.setItem('token',data.token)
+        this.auth.GetOrder().then(
+          data =>this.OrderList(data),
+          error =>console.log(error)
+        )
+      },
+      error => console.log(error)
+    )
+  }
+
+  cs(){
+    console.log("onchanged");
+    console.log(this.slist.length);
+    // console.log(this.slist);
+    let currentIndex = this.slides.getActiveIndex();
+    console.log("Current index is", currentIndex);
+    if (currentIndex==this.slist.length){
+      currentIndex=currentIndex-1;
+    }
+    console.log("Current index is", currentIndex);
+    let iccid=this.slist[currentIndex].iccid;
+    console.log(iccid);
+
+
+    this.auth.GetOrderByiccid(iccid).then(
+      data => this.orde=data.data,
+      error => console.log(error)
+    );
+
+  }
+
+  OrderList(data){
+    if (data.status==1) {
+      this.list=data.data;
+      this.slist=data.data.detail;
+      this.auth.GetOrderByiccid(this.slist[0].iccid).then(
+        data => this.orde=data.data,
+        error => console.log(error+data.msg)
+      );
+
+      console.log(data);
+    }else {
+      this.auth.presentToast(data.msg);
+    }
+
+  }
+  private list;
+  private slist;
+  private orde;
+}

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>充值记录</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  
+    <ion-list out-line>
+      <ion-item>
+        <ion-label>充值日期</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" doneText="完成" cancelText="取消" [(ngModel)]="CurrentDate" (ngModelChange)="GetTopupRecord($event)"></ion-datetime>
+        <!--<ion-input type="date" value="CurrentDate" [(ngModel)]="CurrentDate" (ngModelChange)="GetTopupRecord($event)"></ion-input>-->
+      </ion-item>
+    </ion-list>    
+
+
+    <ion-list no-margin>
+      <ion-item *ngFor="let item of items">
+        <ion-row align-items-center>
+          <ion-col label>
+            <p><label>订单号：</label>{{item.order_no}}</p>
+            <p><label>充值时间：</label>{{item.order_time}}</p>
+            <p><label>充值金额：</label>{{item.pay_value/100}}元</p>
+            <p *ngIf="item.payed"><label>支付时间：</label>{{item.pay_time}}</p>
+          </ion-col>
+          <ion-col col-2 *ngIf="item.payed == false">
+            <button ion-button small no-shadow color="secondary" (click)="ToPay(item)">支付</button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+</ion-content>
+<ion-footer no-shadow>
+  <ion-toolbar auto-height>
+    <ion-title text-center>
+      <p f-1-3>总计：{{TotalValue}}元，{{TotalCount}}笔</p>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

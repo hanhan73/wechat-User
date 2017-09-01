@@ -1,0 +1,113 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { OrderInfoPage } from '../order-info/order-info';
+import { DeliveryService, TAuth } from '../services';
+
+@Component({
+  selector: 'page-delivery-record',
+  templateUrl: 'delivery-record.html'
+})
+
+export class DeliveryRecordPage extends TCommonPage
+{
+    constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams, 
+        public loadingCtrl: LoadingController, 
+        public toastCtrl: ToastController,
+        public service: DeliveryService,
+        public auth: TAuth) 
+    {
+        super(navCtrl, navParams, loadingCtrl, toastCtrl);
+
+        this.CurrentDate = new Date().toLocaleDateString();
+
+        let item = navParams.get('item')
+        this.UserId = item.id;
+        let dt = new Date();
+        this.CurrentDate = this.date2str(dt);
+        
+        this.Refresh();
+    }  
+
+    Refresh()
+    {
+                
+        if (this.auth.UserInfo.role_type == 0)
+        {
+          this.service.DeliverRecord2(this.UserId, this.CurrentDate).then(
+            data => this.SetData(data),
+            error => console.log(error)
+          );
+
+        }
+        else
+        {
+          this.service.DeliverRecord(this.UserId, this.CurrentDate).then(
+            data => this.SetData(data),
+            error => console.log(error)
+          );
+        }
+    }
+
+    SetData(data)
+    {
+        this.items = data;
+        this.TotalValue = 0;
+        for(let i = 0; i < this.items.length; i++)
+        {
+          let item = this.items[i];
+          if (item.deliver_fee == null)
+          {
+            item['deliver_fee'] = 0;
+          }
+
+          if (item.per_addition_fee == null)
+          {
+            item['per_addition_fee'] = 0;
+          }
+
+          item['deliveried'] = item.delivery_time != null;
+          item['state'] = this.GetStateText(item);
+
+          this.TotalValue += item.deliver_fee + item.per_addition_fee;
+        }
+
+        this.TotalValue = this.TotalValue/100;
+        this.TotalCount = this.items.length;
+
+        console.log(this.items);
+    }
+  
+    GetStateText(item)
+    {
+      let result = '未抢单';
+      if (item.delivery_time != null)
+      {
+        result = '已配送';
+      }
+      else if (item.get_time != null)
+      {
+        result = '已抢单';
+      }
+
+      return result;
+    }
+
+    GetDeliveryRecord()
+    {
+        this.Refresh();
+    }
+
+    OpenOrder(order_no)
+    {
+        this.navCtrl.push(OrderInfoPage, {item: order_no});
+    }
+
+    private UserId;
+    private CurrentDate;
+    private items;
+    private TotalCount = 0;
+    private TotalValue = 0;  
+}

@@ -1,0 +1,12 @@
+page-home {
+    .portrait 
+    {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        position: absolute;
+        top: 25px;
+        border: 2px solid #e1edf7;
+        left: 5%;
+    }
+}

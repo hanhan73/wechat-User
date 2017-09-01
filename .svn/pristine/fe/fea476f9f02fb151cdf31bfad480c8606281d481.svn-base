@@ -1,0 +1,8 @@
+<ion-content>
+<img src="assets/icon/action/actioblue.png" style="width: 100%;z-index: -1;">
+  <ion-label class="actionone">支付激活设备，畅享智慧生活</ion-label>
+  <i class="actionrmb">6888元</i>
+  <ion-label class="actiontwo">内含一年无限流量套餐</ion-label>
+
+  <button class="action_btn" ion-button >立即支付</button>
+</ion-content>

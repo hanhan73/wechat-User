@@ -1,0 +1,18 @@
+<ion-content>
+  <img class="heimg" src="assets/icon/Draw/version.png">
+  <div class="drawhe">
+    <img  src="assets/icon/Draw/true.png">
+    <ion-label>支付成功</ion-label>
+    <span>支付金额：元</span>
+  </div>
+  <img class="starimg" src="assets/icon/Draw/start2.png">
+  <img class="liwuimg" src="assets/icon/Draw/liwu.png">
+  <ion-label class="one1"><strong>恭喜您完成支付,</strong></ion-label>
+  <ion-label class="one2"><strong>获得抽奖一次</strong></ion-label>
+  <img class="starimg-s" src="assets/icon/Draw/star.png">
+
+  <img style="width:80%;position: absolute;left: 10%;top: 30%" src="assets/icon/Draw/bgg.png">
+
+  <ion-label class="one3">进入公众号还有更多优惠哦</ion-label>
+  <ion-label class="one4">由<span>车联网运营商</span>提供</ion-label>
+</ion-content>

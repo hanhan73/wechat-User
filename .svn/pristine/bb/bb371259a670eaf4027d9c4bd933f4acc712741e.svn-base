@@ -1,0 +1,82 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { TopupPage } from '../pages/topup/topup';
+import { RegisterPage } from '../pages/register/register';
+import { CodePage } from '../pages/code/code';
+import { RechargePage } from '../pages/recharge/recharge';
+import { SrechargePage } from '../pages/srecharge/srecharge'
+import { OrderPage } from '../pages/order/order';
+import { DrawPage } from '../pages/draw/draw';
+import { SigninPage } from '../pages/signin/signin'
+import { ActionPage } from '../pages/action/action';
+import { MysharePage } from '../pages/myshare/myshare';
+import { TBasicService } from '../providers/basic-service';
+import { TAuth } from '../providers/auth';
+import { HomeService } from '../providers/home-service';
+import { TopupService } from '../providers/topup-service';
+import { ActionService } from "../providers/action-service";
+import { RechargeService } from  '../providers/recharge-service' ;
+import { SrechargeService } from '../providers/srecharge-service';
+
+@NgModule({
+  declarations: [
+    MyApp,
+    HomePage,
+    TopupPage,
+    RegisterPage,
+    CodePage,
+    RechargePage,
+    DrawPage,
+    SigninPage,
+    SrechargePage,
+    ActionPage,
+    MysharePage,
+    OrderPage
+  ],
+  imports: [
+    HttpModule,
+    BrowserModule,
+    IonicModule.forRoot(MyApp,{
+      backButtonText: '',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition'
+    })
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    HomePage,
+    TopupPage,
+    RegisterPage,
+    CodePage,
+    RechargePage,
+    OrderPage,
+    DrawPage,
+    SigninPage,
+    SrechargePage,
+    ActionPage,
+    MysharePage
+  ],
+  providers: [
+    TBasicService,
+    TAuth,
+    HomeService,
+    ActionService,
+    RechargeService,
+    SrechargeService,
+    TopupService,
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
+})
+export class AppModule {}

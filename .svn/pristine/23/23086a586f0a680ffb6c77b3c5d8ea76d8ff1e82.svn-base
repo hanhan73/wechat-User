@@ -1,0 +1,156 @@
+import { ElementRef, Component} from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TAuth } from '../services';
+import { TopupService } from '../services';
+
+
+@Component({
+  selector: 'page-signin',
+  templateUrl: 'signin.html'
+})
+
+export class SigninPage extends TCommonPage
+{
+  constructor(private el: ElementRef,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public loadingCtrl: LoadingController,
+              public toastCtrl: ToastController,
+              public auth: TAuth,
+              public top: TopupService)
+
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+    this.credit = this.navParams.get('point');
+
+
+
+        this.auth.GetsignTime().then(
+          data => this.InitSignedDays(data),
+          error => console.log(error)
+        )
+
+  }
+
+  /**
+  * 日历 获取时间画页面
+  *===================================================================================================================
+  **/
+  GetLastMonthOfDay(FirstDay)
+  {
+    let offset = 1000 * 60 * 60 * 24;
+    let last_day = new Date(FirstDay.getTime() - offset);
+    return last_day.getDate(); //取最后一天
+  }
+
+  PrefixInteger(num, length)
+  {
+    return (Array(length).join('0') + num).slice(-length);
+  }
+
+  Str2Date(value)
+  {
+    return new Date(Date.parse(value.replace(/-/g,"/")));
+  }
+
+  InitCalendar()
+  {
+    let dt = new Date();
+    let cur_month = dt.getMonth();
+    let cur_year = dt.getFullYear();
+
+    let first_day = new Date(cur_year, cur_month, 1);
+    let DayOfLastMonth = this.GetLastMonthOfDay(first_day);
+
+    if (cur_month == 11)
+    {
+      cur_year++;
+      cur_month = 0;
+    }
+    else
+    {
+      cur_month++;
+    }
+
+    let offset_days = first_day.getDay(); //前面补空
+
+    let last_day = new Date(cur_year, cur_month, 1);
+    let offset = 1000 * 60 * 60 * 24;
+    last_day = new Date(last_day.getTime() - offset);
+    let d = DayOfLastMonth - offset_days + 1;
+
+    for (let i = 0; i < offset_days; i++) //补全前面空档日期
+    {
+      this.days.push(
+        {"day": this.PrefixInteger(d++, 2), "style": "sign-calendar-lastmonth"}
+      );
+
+    }
+
+    let n = last_day.getDate(); //最后一天
+    for (let i = 1; i <= n; i++)
+    {
+      if (this.TodayIsSigned(i))
+      {
+        console.log("day is signed:" + i);
+        this.days.push(
+          {"day": this.PrefixInteger(i, 2), "style": "sign-calendar-day-selected"}
+        );
+      }
+      else
+      {
+        this.days.push(
+          {"day": this.PrefixInteger(i, 2), "style": "sign-calendar-day"}
+        );
+      }
+    }
+
+    n = 42 - n - offset_days; //最后几天补全
+    for (let i = 1; i <= n; i++)
+    {
+      this.days.push(
+        {"day": this.PrefixInteger(i, 2), "style": "sign-calendar-lastmonth"}
+      );
+    }
+
+    console.log(this.days);
+  }
+
+  InitSignedDays(data)
+  {
+    if (data.status == 1)
+    {
+      let days = data.data;
+      for (let i = 0; i < days.length; i++)
+      {
+        let dt = this.Str2Date(days[i].dt);
+        this.signed_days.push(dt);
+      }
+    }
+
+    this.InitCalendar();
+  }
+
+  TodayIsSigned(day)
+  {
+    let result = false;
+
+    for (let i = 0; i < this.signed_days.length; i++)
+    {
+      let dt = this.signed_days[i];
+      if (dt.getDate() == day)
+      {
+        result = true;
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  private credit;
+  private days = [];
+  private signed_days = [];
+}

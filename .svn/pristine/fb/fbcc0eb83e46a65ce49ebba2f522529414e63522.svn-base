@@ -1,0 +1,103 @@
+import { ElementRef, Component} from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TAuth } from '../services';
+import { TopupService } from '../services';
+import {error} from "jweixin";
+import {assign} from "rxjs/util/assign";
+//import {error} from "jweixin";
+
+@Component({
+  selector: 'page-signin',
+  templateUrl: 'signin.html'
+})
+
+export class SigninPage extends TCommonPage
+{
+  constructor(private el: ElementRef,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public loadingCtrl: LoadingController,
+              public toastCtrl: ToastController,
+              public auth: TAuth,
+              public top: TopupService)
+
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+    this.jifen = this.navParams.get('point');
+    this.getTime();
+
+    this.auth.login().then(
+      data => {
+        localStorage.setItem('token',data.token)
+        this.auth.GetsignTime().then(
+          data => this.cutday(data),
+          error => console.log(error)
+        )
+      },
+      error => console.log(error)
+    )
+  }
+    sumDay=[];
+  /**
+   * 日历 获取时间画页面
+   * ===================================================================================================================
+   */
+  getTime() {
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth()+1;
+    let frist_day = new Date(year,month-1,1).getDay();
+    let final_day = new Date(year,month-1,0).getDay();
+    let startpoint = frist_day-1>-1?frist_day-1:6;
+    let sum = new Date(year,month,0).getDate();
+    console.log(sum)
+    console.log('年份'+year+'月份'+month+'本月开始第一天星期'+frist_day+'本月结束最后一天星期'+final_day);
+    // let ttd=document.getElementsByTagName('tbody')[0].getElementsByTagName('td');
+    // document.getElementById('calendar').getElementsByTagName('span')[0].innerText= year + '年' + month + '月';
+    // this.sumDay.length()
+    for (var i = startpoint; i<final_day+startpoint; i++) {
+      // ttd[i].innerText=String(i-startpoint+1);
+      //this.sumDay=i-startpoint+1;
+    }
+    for(var a = 0;a<frist_day;a++) {
+      this.sumDay.push('');
+    }
+    for(var h = 0; h<sum; h++) {
+      if(h<9) {
+        this.sumDay.push('0'+(h+1));
+      }
+      else {
+        this.sumDay.push(h+1);
+      }
+    }
+
+  }
+  signData= [];
+  //截取日期
+  cutday(data) {
+    console.log(data);
+    if (data.status == 1) {
+      let c = data.data;
+      for (var i = 0;i<c.length; i++) {
+       this.signData[i] = c[i].dt.substring(8,10);
+      }
+    }
+  }
+
+  //获取已签到日期
+  coltime(sd) {
+    // var signData=[1,8,9,13,16,26];
+    for(var j=0;j<this.signData.length;j++) {
+      if (sd==this.signData[j]) {
+        // console.log(sd);
+        return {
+          'border':'1px red solid',
+          'border-radius': '8px',
+          'height':'5%'
+        }
+      }
+    }
+  }
+  private jifen;
+}

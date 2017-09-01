@@ -1,0 +1,98 @@
+<ion-header style="height: 20% ;">
+  <!--<ion-item class="he" >-->
+  <img src="assets/icon/bg.png" style="z-index: -1;height:100%;width: 100%;">
+    <h1 ><img class="top" [src]="imsrc" ></h1>
+    <div class="info">
+      <span class="h2">昵称: {{Username}}</span>
+      <span class="h2">积分： {{point}}</span>
+    </div>
+    <button  ion-button  round class="sb" [disabled]="signDis"  (click)="sign()">签到领积分</button>
+  <!--</ion-item>-->
+</ion-header>
+
+<ion-content padding>
+    <button ion-button  full  style="position: static;width: 100%;font-size: 1.4rem" (click)="toselectpage()" *ngIf="btnstatus">查询充值</button>
+  <ion-list>
+    <ion-slides  pager>
+      <ion-slide style="height: 132px"  *ngFor="let de of deviceInfo">
+        <div class="cordNum" >
+          {{de.detail.iccid}}
+          <img class="cimg" src="assets/icon/small_logo.png">
+          <img class="cimg_two" src="assets/icon/4g.png">
+        </div>
+        <ion-label>我的流量卡1</ion-label>
+        <div class="title plain">已使用流量/剩余流量</div>
+        <div class="container">
+          <div class="bar">
+            <span class="bar-unfill" style="height: 13px;">
+              <span class="num">{{de.detail.total_flow}}M</span>
+              <span class="bar-fill"  [ngStyle]="{'width':de.detail.used_flow/de.detail.total_flow*100+'%'}">
+                <span class="num2" *ngIf="de.detail.used_flow>0">{{de.detail.used_flow}}M</span>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="title plain">已使用时间/剩余有效期</div>
+        <div class="container">
+          <div class="bar">
+            <span class="bar-unfill" style="background-color:#A1FF5A;height: 13px">
+              <span class="num">天</span>
+              <span class="bar-fill" style="background-color: #FF9000;width: 50%">
+                <span class="num2">天</span>
+              </span>
+            </span>
+          </div>
+        </div>
+        <button ion-button round class="rb" (click)="createorder(de.iccid)">充值</button>
+        <button ion-button round class="ob" (click)="offdevice(de.id)">解绑</button>
+      </ion-slide>
+    </ion-slides>
+    <!--<ion-icon id="left" name="ios-arrow-back" ></ion-icon>-->
+    <!--<ion-icon id="right" name="ios-arrow-forward" ></ion-icon>-->
+    <hr style="height:4px;border:none;border-top:0px solid #8c8c8c;" />
+    <ion-slides pager style="height: 140px;">
+      <ion-slide >
+        <img src="assets/icon/20170707120239.png" style="width: 100%;height: 100%">
+      </ion-slide>
+    </ion-slides>
+    <hr style="height:4px;border:none;border-top:0px solid #8c8c8c;" />
+    <ion-grid >
+      <ion-row>
+        <ion-col width-10 style="display: block" (click)="ToRecharge()" >
+          <img src="assets/icon/fenrun.svg">
+          <ion-label class="gridlable" >我的分润</ion-label>
+        </ion-col>
+        <ion-col width-10 (click)="presentToast('进入商店')">
+          <img src="assets/icon/shop.svg">
+          <ion-label class="gridlable">进入商店</ion-label>
+        </ion-col>
+        <ion-col width-10 (click)="presentToast('热销商品')">
+          <img src="assets/icon/hot.svg">
+          <ion-label class="gridlable">热销商品</ion-label>
+        </ion-col>
+        <ion-col width-10 (click)="presentToast('我的车机')">
+          <img src="assets/icon/wangluo.svg" >
+          <ion-label class="gridlable">网络测速</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-10 (click)="presentToast('我的车机')">
+          <img src="assets/icon/C-CAR.svg" >
+          <ion-label class="gridlable">我的车机</ion-label>
+        </ion-col>
+        <ion-col width-10 (click)="ToRecharge()">
+          <img src="assets/icon/recharge.svg">
+          <ion-label class="gridlable">充值记录</ion-label>
+        </ion-col>
+        <ion-col width-10 (click)="presentToast('我的相机')">
+          <img src="assets/icon/photograph.svg">
+          <ion-label class="gridlable">我的相机</ion-label>
+        </ion-col>
+        <ion-col width-10 (click)="presentToast('商城')">
+          <img src="assets/icon/consumption.svg">
+          <ion-label class="shop">录像</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

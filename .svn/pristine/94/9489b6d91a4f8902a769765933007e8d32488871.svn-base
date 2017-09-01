@@ -1,0 +1,38 @@
+page-register {
+  [padding] h1:first-child, [padding] h2:first-child, [padding] h3:first-child, [padding] h4:first-child, [padding] h5:first-child, [padding] h6:first-child{
+    margin-top: 5.7rem;
+  }
+
+  .backimg-content {
+    background: url("../../assets/icon/register/bg.gif") no-repeat;
+    background-size: 100%;
+  }
+
+  ion-col {
+    background: rgba(0,0,0,0);
+    border: 1px solid #abc2f8;
+    border-radius: 64px;
+    color: white;
+  }
+
+  .code {
+    color: white;
+    border: none;
+    margin-right: 11%;
+    margin-top:1%;
+    background-color: #48c1e4;
+    padding: 5% 2%;
+    margin-left: 2%;
+  }
+
+  .signcss {
+    width: 78%;
+    margin: 1% 11%;
+    background-color: #15a6ff;
+  }
+
+  .text-input {
+    margin: 8px 8px 8px 18px;
+    //text-align: center;
+  }
+}

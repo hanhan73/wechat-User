@@ -1,0 +1,11 @@
+{
+  "name": "blank",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/sps",
+      "proxyUrl": "http://api.supaisong.cn/mall"
+    }
+  ],  
+  "type": "ionic-angular"
+}

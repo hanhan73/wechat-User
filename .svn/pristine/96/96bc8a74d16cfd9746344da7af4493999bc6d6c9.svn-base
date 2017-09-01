@@ -1,0 +1,112 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { TBasicService } from '../providers/basic-service';
+
+@Injectable()
+export class TAuth extends TBasicService
+{
+  constructor(public http: Http)
+  {
+    super(http);
+    this.openid='12';
+  }
+
+  get state(): string
+  {
+    return localStorage.getItem('state');
+  }
+
+  set state(value: string)
+  {
+    localStorage.setItem('state', value);
+  }
+
+  get openid(): string
+  {
+    return localStorage.getItem("openid");
+  }
+
+  set openid(value: string)
+  {
+    localStorage.setItem("openid", value);
+  }
+
+  get UserId(): any
+  {
+    return localStorage.getItem("id");
+  }
+
+  set UserId(value: any)
+  {
+    localStorage.setItem("id", value);
+  }
+  GetOpenId(){
+  }
+  GetRequestParam(url)
+  {
+    if (url)
+    {
+        let idx = url.indexOf("?");
+        if (idx != -1)
+        {
+            let uri = url.slice(idx + 1);
+            uri = uri.split("&");
+            for (let param of uri)
+            {
+              let p = param.split('=');
+              if (p.length > 1)
+              {
+                let param_name = p[0];
+                let param_value = p[1];
+
+                localStorage.setItem(param_name, param_value);
+              }
+            }
+        }
+    }
+  }
+
+  login()
+  {
+      let param = {"openid": this.openid};
+      return this.Post(param, 'login');
+  }
+
+  logout()
+  {
+    localStorage.removeItem('token');
+  }
+
+  has_logon(): Boolean
+  {
+    return localStorage.getItem('token') != undefined;
+  }
+
+  RegisterUser(Phonenum,mycode)
+  {
+    let data = {};
+    // data['openid'] = this.openid;
+    data['openid'] = this.openid;
+    data['mobile_no'] = Phonenum;
+    data['code']=mycode;
+    // data['password'] = Password;
+    // data['mobile_no'] = MobileNo;
+    // data['email'] = Email;
+    // data['name'] = MerchantName;
+    // data['address'] = Address;
+    // data['role_type'] = RoleType;
+
+    return this.Post(data, 'customer');
+  }
+  SendCode(Phonenum){
+    return this.Get('get_code/'+Phonenum);
+  }
+  IfNewUser(){
+    console.log('this is IfNewUser');
+    let data={};
+    data['openid'] = this.openid;
+    return this.Put(data,'check_customer');
+  }
+  public UserInfo;
+  public Reged: Boolean;
+}

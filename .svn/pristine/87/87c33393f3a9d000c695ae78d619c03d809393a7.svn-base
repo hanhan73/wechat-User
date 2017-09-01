@@ -1,0 +1,36 @@
+<ion-header style="height: 25%;border-bottom: 1px solid #93CBED" no-shadow>
+  <ion-row style="height: 100%;width: 100%">
+    <ion-col  class="cardnum" style="height: 100%">
+        <div class="ca">
+          {{iccid}}
+        </div>
+        <img style="width: 37px;margin-left: 1rem" src="assets/icon/Order/4g.png">
+
+    </ion-col>
+    <ion-col style="text-align: center">
+
+          <ion-label style="margin: 30px 2px 10px 0"><span>全</span>网通<span>全</span>国<span>4G</span>流量</ion-label>
+          <ion-label style="text-decoration: line-through;color:#949494;">官方指导价50元/G</ion-label>
+
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content >
+<ion-row>
+  <ion-col  class="ordercss" *ngFor="let ob of good_items" (click)="ConfirmOrder(ob)" [ngStyle]="colcss(ob)" style="height: 99px">
+    <ion-label style="color: #f48f0a;" [ngStyle]="lablecss(ob)">
+      <strong style="font-size: 2.5rem">{{ob.flow_size/1024}}</strong>G</ion-label>
+    <div class="colable" >
+      <ion-label>￥<strong>{{(ob.mode==0)?((ob.price*ob.discount)/100/100):(ob.price/100)}}</strong></ion-label>
+      <ion-label style="text-decoration: line-through;" *ngIf="ob.mode==undefined">官方指导价￥{{(ob.flow_size/1024)*50}}</ion-label>
+      <ion-label  *ngIf="ob.mode==0">首次充值专享{{ob.discount/100}}折</ion-label>
+    </div>
+  </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer style="color: #a0a0a0; text-align: center">
+  <ion-label>温馨提示:</ion-label>
+  <ion-label>支付成功后流量到账通常稍有延迟，请耐心等待</ion-label>
+  <ion-label>并尽量避免在每月月末高峰期间进行充值</ion-label>
+</ion-footer>

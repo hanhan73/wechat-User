@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>注册</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="RoleType < 0">    
+    <ion-row>
+      <ion-col><button ion-button full (click)="SetRoleType(0)">我是店主</button></ion-col>
+      <ion-col><button ion-button full (click)="SetRoleType(1)">我是骑手</button></ion-col>
+    </ion-row>        
+  </div>
+  <div *ngIf="RoleType >= 0">
+    <ion-list>
+        <ion-item>
+          <ion-label floating>登录名</ion-label>
+          <ion-input type="text" value="" [(ngModel)]="LoginName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>密码</ion-label>
+          <ion-input type="password" [(ngModel)]="Password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>手机号</ion-label>
+          <ion-input type="text" value="" [(ngModel)]="MobileNo"></ion-input>
+        </ion-item>        
+        <ion-item>
+          <ion-label floating>邮箱</ion-label>
+          <ion-input type="text" value="" [(ngModel)]="Email"></ion-input>
+        </ion-item>
+        <div *ngIf="RoleType == 0">
+          <ion-item>
+            <ion-label floating>商户名称</ion-label>
+            <ion-input type="text" value="" [(ngModel)]="MerchantName"></ion-input>
+          </ion-item>          
+          <ion-item>
+            <ion-label floating>地址</ion-label>
+            <ion-input type="text" value="" [(ngModel)]="Address"></ion-input>
+          </ion-item>        
+        </div>                  
+        <button ion-button full (click)="Submit()">完成</button>        
+    </ion-list>
+  </div>
+</ion-content>

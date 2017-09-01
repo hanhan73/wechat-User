@@ -1,0 +1,4 @@
+<ion-content>
+  <img id="back" style="width: 100%;height: 100%" src="assets/icon/01.png">
+  <img id="code" src="assets/icon/07.jpg">
+</ion-content>

@@ -1,0 +1,56 @@
+page-signin{
+  ion-content{
+    position: relative;
+  }
+ .ring{
+   position: absolute;
+   color: #a97415;
+   top: 2rem;
+   font-size:1.4rem;
+   left: 7.7rem;
+   background: url(../../assets/icon/Signin/qq.png) no-repeat;
+   background-size: 100%;
+   width: 6rem;
+   height: 6rem;
+ }
+  .ring  ion-label{
+    margin: 0;
+    text-align: center;
+  }
+  .mylable{
+    position: absolute;
+    top:3rem;
+    left: 15rem;
+    font-size:1.6rem;
+  }
+  .mylable ion-label{
+    margin: 0;
+    padding-top: 0.3rem;
+  }
+  .between{
+    position: absolute;
+    width: 16.6rem;
+    top:13rem;
+    left: 7rem ;
+  }
+  .gold{
+    width: 6rem;
+    margin-top: -5rem;
+  }
+  .di{
+    font-weight: 500;
+    color: #753307;
+    padding-left: 1rem;
+    font-size: 12px;
+    text-align: left;
+  }
+  .di ion-label{
+    margin: 0px;
+    margin-top: 0.7rem;
+    margin-left: 0.5rem;
+  }
+
+  .di span{
+    color: #46b9fb;
+  }
+}

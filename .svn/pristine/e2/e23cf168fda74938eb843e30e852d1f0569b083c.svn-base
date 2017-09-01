@@ -1,0 +1,223 @@
+page-signin {
+  // ion-content {
+  //   position: relative;
+  // }
+
+  .sign-top-bg {
+    background: url(../../assets/icon/Signin/bg@2x.png) center top no-repeat;
+    background-size: cover;
+    min-height: 11rem;
+  }
+
+  .sign-middle-bg {
+    background: url(../../assets/icon/Signin/banner@2x.png) center top no-repeat;
+    background-size: cover;
+    min-height: 31rem;
+  }
+
+  .sign-offset {
+    margin-top: 4%;
+  }
+
+  .sign-round {
+    border-style: solid;
+    border-color: #a97415;
+    background-color: white;
+    border-radius: 50px;
+    width: 6rem;
+    height: 6rem;
+    margin-left: 50%;
+  }
+
+  .sign-round-label {
+    display: block;
+    padding:10px 0 2px;
+    text-align: center;
+  }
+
+  .sign-round-line {
+    background-color: #a97415;
+    padding:0;
+    margin:2px auto;
+    width: 70%;
+  }
+
+  .sign-round-label2 {
+    display: block;
+    text-align: center;
+    font-size:1.1rem;
+  }
+
+  .credit {
+    color: red;
+    font-size: 2rem;
+  }
+
+  .credit-progress {
+    width: 70%;
+    border-radius: 8px;
+    margin-top: 2.5%;
+    margin-left: 15%;
+    background: #a67615;
+    height: 0.6rem;
+  }
+
+  .credit-progress-fill {
+    background: #0daffe;
+    height: 0.6rem;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .sign-calendar {
+    border-radius: 3px;
+    background: white;
+    padding: 1px;
+    box-shadow: -6px 6px 3px lightgray;
+    margin-top: 10%;
+  }
+
+  .sign-calendar-offset {
+    height: 2.7rem;
+  }
+
+  .sign-calendar-title {
+    text-align: center;
+    max-height: 1.7rem;
+    margin-right:3%;
+    margin-left: 7%;
+    font-size: 1rem;
+  }
+
+  .sign-calendar-title-day {
+    width: 14%;
+  }
+
+  .sign-calendar-title-day-weekend {
+    @extend .sign-calendar-title-day;
+    color: red;
+  }
+
+  .sign-calendar-day {
+    text-align: center;
+    max-height: 1.3rem;
+    min-width: 14%;
+    font-size: 1rem;
+  }
+
+  .sign-calendar-lastmonth {
+    @extend .sign-calendar-title-day;
+    @extend .sign-calendar-day;
+    color: gray;
+  }
+
+  .sign-calendar-day-selected {
+    @extend .sign-calendar-day;
+    color: royalblue;
+    font-weight: bold;
+    text-decoration: line-through;
+  }
+
+  .sign-calendar-gold {
+    background: url(../../assets/icon/Signin/Gold.png) center top no-repeat;
+    background-size: contain;
+    margin-top: 6%;
+    margin-left: 35%;
+    height: 2.4rem;
+    width: 6rem;
+  }
+
+  .sign-calendar-pen {
+    background: url(../../assets/icon/Signin/pen.png) center top no-repeat;
+    background-size: contain;
+    margin-top: -10%;
+    margin-left: -1%;
+    height: 5.04rem;
+    width: 4.5rem;
+  }
+
+  .sign-bottom {
+    margin-top: -7%;
+    color: #753307;
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+    }
+    ul {
+      margin:0;
+    }
+    li {
+      font-size: 1.2rem;
+      padding: 2px 0;
+      list-style: decimal
+    }
+  }
+
+  .sign-bottom-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .sign-bottom-label {
+    font-weight: bold;
+    margin-top: -2%;
+    font-size: 1.2rem;
+  }
+
+  .label-blue {
+    color: royalblue;
+  }
+
+}
+
+.circle {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background-color: #C0C0C0;
+}
+
+.list-date-week {
+  ul.list-date-circle {
+    padding: 0;
+    margin: 0;
+    height:2em;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    li {
+      flex: 0 0 percentage(1/7);
+      //padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+      text-align: center;
+      //width: 0.5rem;
+      //max-height: 0.5rem;
+      span{
+        display: inline-block;
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+        background-color: #C0C0C0;
+      }
+    }
+  }
+
+  ul.list-date-group {
+    padding:0;
+    margin:0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    li {
+      flex:0 0 percentage(1/7);
+      padding: 5px 0;
+      text-align: center;
+      &.text-danger {
+        color:red
+      }
+    }
+  }
+}
+
+

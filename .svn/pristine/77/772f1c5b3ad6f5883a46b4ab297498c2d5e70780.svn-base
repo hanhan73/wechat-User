@@ -1,0 +1,231 @@
+@mixin IonList($color,$value){
+    &[list-#{$color}]{
+        background-color:lighten($value,50%);
+
+        &[out-line]{
+            border:solid 1px lighten($value,40%);
+        }
+
+        ion-item-divider.item,ion-item.item{
+            border-bottom:solid 1px lighten($value,40%);
+        }
+        ion-item-divider.item{
+            background-color:lighten($value,5%);
+            ion-label{
+                color:white;
+            }
+        }
+        ion-item.item{            
+            ion-label{
+                color:darken($value,20%)
+            }
+            ion-note{
+                color:lighten($value,20%)
+            }
+        }
+    }
+}
+
+@mixin ColorText()
+{
+    &.high-light {
+        text-shadow: 1px 1px 0px rgba(255, 255, 255, .7);
+    }
+
+    &[text-strong]{
+        font-weight:bold;
+    }
+
+    &[text-shadow] {
+        text-shadow: 1px 1px 1px #202020;
+    }
+    &[text-light],
+    &.text-light {
+        color: color($colors, light, base);
+        [b-g-c] {
+            background-color: rgba(255, 255, 255, .05);
+        }
+    }
+
+    &[text-dark],
+    &.text-dark {
+        color: color($colors, dark, base);        
+    }
+
+    &[text-success],
+    &.text-success {
+        color: color($colors, success, base);
+    }
+
+    &[text-danger],
+    &.text-danger {
+        color: color($colors, danger, base);
+    }
+
+    &[text-yellow] {
+        color: #f4e827;
+    } 
+
+}
+
+@mixin InOutSide($maxsize:50) {
+    @for $i from 5 through $maxsize {
+        @if($i%5==0) {
+            &[p-#{$i}],&.p-#{$i} {
+                padding: $i+px;
+            }
+            &[p-l-#{$i}],&.p-l-#{$i} {
+                padding-left: $i+px;
+            }
+            &[p-r-#{$i}],&.p-r-#{$i} {
+                padding-right: $i+px;
+            }
+            &[p-t-#{$i}],&.p-t-#{$i} {
+                padding-top: $i+px;
+            }
+            &[p-b-#{$i}],&.p-b-#{$i} {
+                padding-bottom: $i+px;
+            }
+            &[m-#{$i}],&.m-#{$i} {
+                margin: $i+px;
+            }
+            &[m-l-#{$i}],&.m-l-#{$i} {
+                margin-left: $i+px;
+            }
+            &[m-r-#{$i}],&.m-r-#{$i} {
+                margin-right: $i+px;
+            }
+            &[m-t-#{$i}],&.m-t-#{$i} {
+                margin-top: $i+px;
+            }
+            &[m-b-#{$i}],&.m-b-#{$i} {
+                margin-bottom: $i+px;
+            }
+
+            &[n-p-#{$i}],&.n-p-#{$i} {
+                padding: -$i+px;
+            }
+            &[n-p-l-#{$i}],&.n-p-l-#{$i} {
+                padding-left: -$i+px;
+            }
+            &[n-p-r-#{$i}],&.n-p-r-#{$i} {
+                padding-right: -$i+px;
+            }
+            &[n-p-t-#{$i}],&.n-p-t-#{$i} {
+                padding-top: -$i+px;
+            }
+            &[n-p-b-#{$i}],&.n-p-b-#{$i} {
+                padding-bottom: -$i+px;
+            }
+            &[n-m-#{$i}],&.n-m-#{$i} {
+                margin: -$i+px;
+            }
+            &[n-m-l-#{$i}],&.n-m-l-#{$i} {
+                margin-left: -$i+px;
+            }
+            &[n-m-r-#{$i}],&.n-m-r-#{$i} {
+                margin-right: -$i+px;
+            }
+            &[n-m-t-#{$i}],&.n-m-t-#{$i} {
+                margin-top: -$i+px;
+            }
+            &[n-m-b-#{$i}],&.n-m-b-#{$i} {
+                margin-bottom: -$i+px;
+            }
+        }
+    }
+}
+
+
+
+
+@mixin gradient-radial($color,
+$lightColor,
+$darkColor) {
+    background-image: radial-gradient(circle at 25% 35%, $lightColor, $color, $darkColor);
+    background-repeat: no-repeat;
+}
+
+@mixin gradient-liner($direction,$startColor,$endColor) {
+    background-image: linear-gradient(to $direction,$startColor,$endColor);
+    background-image: -webkit-linear-gradient($direction,$startColor,$endColor);
+}
+
+@mixin square ($width:100%, $outlineStyle:none, $outlineWidth:0, $borderRadius:0) 
+{
+    position: relative;
+    margin:auto;
+    width: $width;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: $width/2;
+    padding-top: $width/2;
+    text-align: center;
+    border-style: $outlineStyle;
+    border-width: $outlineWidth;
+    border-radius: $borderRadius;
+}
+
+@mixin scale($s1:1.2) {
+    transform: scale($s1);
+    -webkit-transform: scale($s1);
+    -moz-transform: scale($s1);
+    -o-transform: scale($s1);
+    -ms-transform: scale($s1);
+}
+
+@mixin FontGeneration($num:9) {
+    @for $i from 1 through $num {
+        @for $j from 0 through $num {
+            &[f-#{$i}-#{$j}],
+            &.f-#{$i}-#{$j} {
+                font-size: $i + $j/10 + rem;
+            }
+        }
+    }
+}
+
+@mixin FlexBox($value:center) {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: $value;
+    -webkit-align-items: $value;
+    -webkit-box-align: $value;
+    align-items: $value;
+    -webkit-justify-content: $value;
+    justify-content: $value;
+}
+
+@mixin FadeMode($way:fadeIn) {
+    @keyframes #{$way} {
+        0% {
+            @if $way==fadeIn or $way==fadeInOut {
+                opacity: 0;
+            }
+            @else if $way==fadeOut {
+                opacity: 1;
+            }
+        }
+        50% {
+            @if $way==fadeIn or $way==fadeOut {
+                opacity: .5;
+            }
+            @else if $way==fadeInOut {
+                opacity: 1;
+            }
+        }
+        100% {
+            @if $way==fadeIn {
+                opacity: 1;
+            }
+            @else if $way==fadeOut or $way==fadeInOut {
+                opacity: 0;
+            }
+        }
+    }
+}

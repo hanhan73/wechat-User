@@ -1,0 +1,38 @@
+<ion-content>
+  <div class="header" style="height: 128px">
+    <div class="cardnum">
+      ICCID<br>
+      {{iccid}}
+    </div>
+    <div class="wen">
+      <span>中国电信全国流量</span>
+      <ion-label> 官方指导价:<span>50G/元</span></ion-label>
+    </div>
+    <dl>
+      <dt><img src="assets/icon/Order/full.svg"></dt>
+      <dd>正常</dd>
+      <dt><img src="assets/icon/Order/medium.svg"></dt>
+      <dd>中等</dd>
+      <dt><img src="assets/icon/Order/crisis.svg"></dt>
+      <dd>危机</dd>
+    </dl>
+  </div>
+  <hr style="background-color:#93CBED;">
+  <ion-grid >
+    <ion-row class="row-wrap">
+      <ion-col  class="one" one  width-25 *ngFor="let ob of orderobj" (click)="ChangeOrder(ob.id,ob.price)">
+        <ion-col class="two" two [style]="two" >A<br>套餐</ion-col>
+        <ion-label>{{ob.price/100}}元 <br>内含{{ob.flow_size/1024}}G</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    <ion-label class="tishi" >此卡为，全国可用，即时生效<br>
+      延长服务有效期至</ion-label>
+    <h5>您需支付：
+      <span >{{money}}元</span>
+    </h5>
+    <ion-label class="tishi">注：1.月卡当月有效,次月清零</ion-label>
+    <ion-label class="tishi2">2.年卡增加服务期限</ion-label>
+  <button ion-button round  padding *ngIf="oid" (click)="wetpay()">立即支付</button>
+  <!---->
+</ion-content>

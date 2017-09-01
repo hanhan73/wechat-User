@@ -1,0 +1,61 @@
+<ion-header style="height: 29rem; border-bottom: 2px gainsboro solid">
+    <ion-row *ngIf="list" style="height:10rem;background: linear-gradient(#4099ff,#0daffe)">
+      <ion-col width-30 class="rehead">
+        <ion-label>累计充值时间</ion-label>
+        <ion-label><strong>{{list.total_month}}</strong>月</ion-label>
+      </ion-col>
+
+      <ion-col width-30 class="rehead">
+        <ion-label>累计充值流量</ion-label>
+        <ion-label><strong>{{list.total_flow}}</strong>G</ion-label>
+      </ion-col>
+
+      <ion-col width-30 class="rehead" style="border-right: none">
+        <ion-label>累计充值金额</ion-label>
+        <ion-label><strong>{{list.total_price}}</strong>元</ion-label>
+      </ion-col>
+    </ion-row>
+  <ion-slides pager style="height: 59%;" (ionSlideDidChange)="cs()">
+    <ion-slide *ngFor="let lists of slist" maxlength="lists.length">
+      <div class="cardbg">
+        <ion-label style="padding-top: 8%;">
+          <span *ngIf="lists.type==1">有限</span>流量卡
+        </ion-label>
+        <ion-row>
+          <ion-col width-20 class="cardcol">
+            <ion-label>累计充值流量</ion-label>
+            <ion-label><strong style="color: #3064cc">{{(lists.iccid_flow/1024)}}</strong>G</ion-label>
+          </ion-col>
+          <ion-col width-20 class="cardcol" style="border-right: none">
+            <ion-label>累计充值金额</ion-label>
+            <ion-label><strong style="color:#FE9C0B">{{lists.iccid_price}}</strong>元</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-label style="font-size: 1.2rem">ICCID:<span>{{lists.iccid}}</span></ion-label>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+</ion-header>
+<ion-content padding>
+      <ion-item>
+         <ion-row style="font-size: 1.6rem;color: dimgray;z-index: 1">
+            <ion-col>充值流量</ion-col>
+            <ion-col>充值金额</ion-col>
+            <ion-col>优惠信息</ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-list>
+
+        <ion-item *ngFor="let o of orde">
+          <ion-row style="font-size: 1.2rem;color: dimgray">
+            <ion-col><strong style="color: #3064cc;font-size: 1.2rem;">{{o.flow_size}}</strong>GB</ion-col>
+            <ion-col><strong style="color:#FE9C0B;font-size: 1.2rem;">{{o.price}}</strong>元</ion-col>
+            <ion-col>
+               {{o.pay_time}}<br/>
+              <i style="color: red">新用户充值</i>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+</ion-content>

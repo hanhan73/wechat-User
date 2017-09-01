@@ -1,0 +1,20 @@
+button{
+    &[btn-tab]{
+        width:100%;
+        display:block;
+        min-height:44px;
+        font-size:1.6rem;
+    }
+    &[oranger]{        
+        color:color($colors,light,base);
+        background-color:color($colors,oranger,base);
+    }
+    &[danger]{        
+        color:color($colors,light,base);
+        background-color:color($colors,danger,base);
+    }
+    &[success]{        
+        color:color($colors,light,base);
+        background-color:color($colors,secondary,base);
+    }
+}

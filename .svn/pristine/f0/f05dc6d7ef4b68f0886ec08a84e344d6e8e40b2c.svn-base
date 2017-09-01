@@ -1,0 +1,174 @@
+page-topup {
+  * {
+    //box-sizing: content-box;
+    font-family: $font-family;
+  }
+  //弹窗按钮样式
+  .alertbuttn{
+    background-color: #0299fe;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .card-header {
+    border-bottom: 1px solid #93CBED;
+    height: 70%;
+
+    .card-number {
+      position: relative;
+      background: url("../../assets/icon/Order/card.png") no-repeat;
+      background-size: 100% 100%;
+      color: #0299fe;
+      margin-left: 4%;
+      margin-top: 4%;
+      margin-bottom: 4%;
+      padding: 3%;
+    }
+
+    .card-img {
+      position: absolute;
+      width: 3rem;
+      left: 8%;
+      top: 68%;
+    }
+
+    .card-iccid {
+      border:  1px solid #0299fe;
+      border-radius: 10px;
+      height: 100%;
+      margin-left: 35%;
+      padding: 0 12%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .iccid-text {
+        width: 90%;
+        font-size: 1.5rem;
+      }
+    }
+
+    .flow-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flow-content {
+      text-align: center;
+      .name-label {
+        color: #0299fe;
+        font-size: 1.6rem;
+        // letter-spacing: 1px;
+        span {
+          color: #f4910e;
+          font-size: 2.2rem;
+          font-weight: 600;
+        }
+      }
+
+      .sale-price {
+        text-decoration: line-through;
+        color: #949494;
+      }
+    }
+
+
+  }
+
+
+
+  //
+  //.cardnum{
+  //  color: #0299fe;
+  //  width: 10%;
+  //  background: url("../../assets/icon/Order/card.png") no-repeat;
+  //  background-size: 100%;
+  //}
+  //.ca{
+  //    border:  1px solid #0299fe;
+  //    border-radius: 10px;
+  //    margin: 4% 8% -4% 50%;
+  //    padding: 3%;
+  //}
+
+
+  ion-row{
+    margin: 1rem;
+  }
+  .ordercss  {
+    border: 1px solid #15a6ff;
+    height: 8rem;
+    background: url("../../assets/icon/Order/blue.png") bottom no-repeat;
+    background-size: 100%;
+    width: 25%;
+    flex-grow: 0;
+    flex-basis: 41%;
+    margin: 1% 2%;
+  }
+  ion-col ion-label {
+    text-align: center;
+    margin: 0px;
+  }
+  .colable{
+    color: white;
+  }
+  //.col{
+  //  margin: 0.5rem;
+  //  flex-basis: 144px;
+  //  flex-grow: 0;
+  //}
+  .label{
+    margin: 4px 2px 10px 0;
+    font-size: 1.3rem;
+  }
+  .one{
+    margin: 0.1rem;
+    width: 120px;
+  }
+  .two{
+    background-color:#15A6FF;
+    color: white;
+    padding: 17% 1%;
+    width: 30px;
+    float: left;
+    text-align: center;
+  }
+  .tishi{
+    color:#A1A1A1;
+    margin-left: 3%;
+    padding-top: 3%;
+  }
+  .tishi2{
+    color:#A1A1A1;
+    margin-left: 11%;
+  }
+  h5{
+    font-size: 16px;
+    color:#49B7FE;
+    margin-left: 3%;
+    padding-top: 5%;
+  }
+  h5 span{
+    color:#FF791F;
+  }
+  .button{
+    background-color:#15A6FF;
+    width: 78%;
+    margin-left: 11%;
+  }
+  .rowtime {
+    width:100%;
+    color: #9f0000;
+    font-size: 1.3rem;
+    margin: 0rem 0.5rem;
+  }
+
+  .coltime {
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    flex-basis: 12px;
+    flex-grow: 0;
+  }
+}

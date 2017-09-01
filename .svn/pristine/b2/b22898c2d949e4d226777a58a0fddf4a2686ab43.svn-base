@@ -1,0 +1,49 @@
+page-myshare{
+
+  ion-header {
+    height: 10rem;
+    background: url("../../assets/icon/myshare/bg.png") no-repeat;
+    background-size: 100%;
+    color: white;
+  }
+  .lable{
+    margin: 19px 8px 11px 0;
+  }
+  .share_lable {
+    font-size: 1.7rem;
+    text-align: left;
+  }
+  .share_lable span {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-left: 10rem;
+  }
+  ion-col{
+    text-align: center;
+  }
+  .card {
+    margin: 0 0 0 0;
+    width: calc(100%);
+  }
+  .button {
+    height : 1.8rem;
+    margin: 0 0;
+  }
+  ion-card {
+    border-bottom: 3px solid #e6e6e6;
+  }
+  .cardlable {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #62c2eb;
+  }
+  .cardbtn {
+    background-color: #feca25;
+    border-radius: 6px;
+    margin-left: 32%;
+  }
+  .deposit ion-col {
+    height: 7rem;
+    color: #B4B4B4;
+  }
+}

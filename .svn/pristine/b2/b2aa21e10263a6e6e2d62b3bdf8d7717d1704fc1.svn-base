@@ -1,0 +1,28 @@
+<ion-content padding>
+  <div id="logo">
+    <h1 style="text-align: center;font-size: 4.3rem;color: white">Welcome</h1>
+  </div>
+    <ion-row style="margin-top: 5%">
+      <ion-col style="padding-left: 1%;margin: 1% 15%;">
+        <ion-input type="tel"  [(ngModel)]="Phonenum" maxlength="11"
+                   placeholder="请输入您的手机号码" clearInput></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style=" padding-left: 1%;margin: 1% 0% 1% 15%; ">
+        <ion-input style="" type="tel"  [(ngModel)]="myCode" maxlength="6"
+                   placeholder="请输入验证码" clearInput>
+
+        </ion-input>
+
+      </ion-col>
+      <button id="code" style="height: 1.5rem;padding: 5% 2%;"
+              ion-button round  (click)="sendcode()" [disabled]="btnname">
+        {{sendbtn}}</button>
+    </ion-row>
+
+
+
+
+  <button class="signcss" ion-button  round  (click)="Submit()">注册</button>
+</ion-content>

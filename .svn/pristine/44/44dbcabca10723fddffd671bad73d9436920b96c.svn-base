@@ -1,0 +1,13 @@
+page-code {
+  .back{
+    position: relative;
+  }
+
+  .code{
+    position: absolute;
+    width: 50%;
+    height: 28%;
+    right: 25%;
+    top: 51%;
+  }
+}

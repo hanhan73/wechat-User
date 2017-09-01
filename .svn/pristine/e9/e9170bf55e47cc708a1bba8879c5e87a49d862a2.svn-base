@@ -1,0 +1,14 @@
+import { ElementRef ,Component} from '@angular/core';
+import {error} from "jweixin";
+@Component({
+  selector: 'page-signin',
+  templateUrl: 'signin.html'
+})
+
+export class SigninPage {
+  constructor(private el: ElementRef,
+              ) {
+
+  }
+
+}

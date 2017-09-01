@@ -1,0 +1,161 @@
+/**
+ * Created by Administrator on 2017/7/7/007.
+ */
+import { ElementRef ,Component} from '@angular/core';
+import { NavController, NavParams ,AlertController,ViewController } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TAuth } from '../services';
+import { OrderService } from '../services';
+import { TopupService } from '../services';
+import {error} from "jweixin";
+import {DrawPage} from "../draw/draw";
+@Component({
+  selector: 'page-order',
+  templateUrl: 'order.html'
+})
+
+export class OrderPage extends TCommonPage
+{
+  constructor(
+    private viewCtrl :ViewController,
+    private alertCtrl:AlertController,
+    private el: ElementRef,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    public auth: TAuth,public order: OrderService,
+    public top: TopupService )
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+
+    let it = navParams.get('item')
+    this.iccid=it;
+    this.auth.login().then(
+      data =>localStorage.setItem('token',data.token),
+      error =>console.log(error)
+    );
+
+    this.order.GetOrderList(
+        this.iccid
+    ).then(
+      data => this.Orderlist(data),
+      error => console.log(error)
+    )
+
+  }
+  goback() {
+    this.GoBack();
+  }
+  /**
+   * 下拉刷新
+   */
+
+  /**
+   * 获取充值项目
+   *====================================================================================================================
+   */
+  Orderlist(data) {
+    console.log(data);
+    let sta =data.status;
+    if (1 == sta) {
+      this.orderobj=data.data;
+      console.log(this.orderobj);
+    }
+    else if (0 == sta) {
+      console.log(data.msg);
+    }
+
+  }
+
+  /*
+  区分不同套餐样式
+   */
+  colcss(ob) {
+    if (ob.mode == 0 ) {
+      //新用户
+      return {
+        'border': '1px solid #F59211',
+        'background': 'url("../../assets/icon/Order/yellow.png") bottom no-repeat',
+        'background-size': '100%'
+      }
+    }
+
+  }
+
+  lablecss(ob) {
+    if (ob.mode == 1 ) {
+      return {
+        'color': '#15a6ff'
+      }
+    }
+  }
+  /**
+   * 选择充值项目
+   *====================================================================================================================
+   */
+  ChangeOrder(ob){
+    if ( ob.mode==1 ) {
+      this.money=(ob.price*ob.discount)/100/100;
+    }
+    else {
+      this.money=ob.price/100;
+    }
+
+    this.oid=ob.id;
+    console.log(this.oid);
+    let prompt = this.alertCtrl.create({
+      title: '充值详情',
+      message:"您将订购价值"+this.money+"元的"+(ob.flow_size)/1024+"G流量套餐",
+      buttons: [
+        {
+          text:'确认支付',
+          handler: data => {
+            this.wetpay();
+          },
+         cssClass:'alertbuttn'
+        }
+      ]
+    })
+    prompt.present();
+  }
+  //充值
+  wetpay(){
+    /**
+     * 创建充值订单 iccid  套餐ID  价格 类型1
+     */
+    this.order.CreateOrder(
+      this.iccid,this.oid,this.money*100
+    ).then(
+      data => this.wetpayF(data),
+      error =>console.log(error)
+    )
+
+  }
+
+  wetpayF(data){
+    let s=data.status;
+    if (s==1) {
+      //创建订单成功
+      //支付
+      this.weiItem=data.data;
+      console.log(this.weiItem)
+      this.top.ToPay(this.weiItem);
+    }
+    else {
+      console.log(data.status)
+      console.log('打印创建订单错误：')
+      console.log(data.msg)
+    }
+  }
+
+    iccid;
+    money;
+    oid;
+    testlable: '新用户首次充值专享优惠';
+    private weiItem;
+    private orderobj: {};
+
+
+}

@@ -1,0 +1,57 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TopupService } from '../services';
+
+@Component({
+  selector: 'page-topup',
+  templateUrl: 'topup.html'
+})
+export class TopupPage extends TCommonPage
+{
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public loadingCtrl: LoadingController, 
+    public toastCtrl: ToastController,
+    public service: TopupService) 
+  {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+
+    this.UserInfo = navParams.get('item');
+    this.service.GetGoodItems().then(
+      data => this.items = data,
+      error => console.log(error)
+    );    
+  }
+  
+  ionViewDidLoad() 
+  {
+    console.log('ionViewDidLoad TopupPage');
+  }
+
+  inited()
+  {
+    return this.items != undefined;
+  }
+
+  topup(item)
+  {
+    let openid = this.UserInfo.openid;
+    let order_value = item.price;
+    this.service.Topup(openid, order_value, order_value).then(
+      data => this.topup_finished(data),
+      error => console.log(error)
+    );
+  }
+
+  topup_finished(data)
+  {
+    console.log(data);
+    this.service.pay(data);
+  }
+
+  private items;
+  private UserInfo;
+}

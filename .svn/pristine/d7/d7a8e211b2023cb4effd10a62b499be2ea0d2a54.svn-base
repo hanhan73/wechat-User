@@ -1,0 +1,204 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { TBasicService } from '../providers/basic-service';
+import { LoadingController, ToastController } from 'ionic-angular';
+@Injectable()
+export class TAuth extends TBasicService
+{
+  constructor(public http: Http,public loadingCtrl: LoadingController,
+  public toastCtrl: ToastController)
+  {
+    super(http);
+  }
+
+  get state(): string
+  {
+    return localStorage.getItem('state');
+  }
+
+  set state(value: string)
+  {
+    localStorage.setItem('state', value);
+  }
+
+  get openid(): string
+  {
+    return localStorage.getItem("openid");
+  }
+
+  set openid(value: string)
+  {
+    localStorage.setItem("openid", value);
+  }
+
+  get iccid(): string
+  {
+    return localStorage.getItem("iccid");
+  }
+
+  set iccid(value: string)
+  {
+    localStorage.setItem("iccid", value);
+  }
+  get UserId(): any
+  {0
+    return localStorage.getItem("id");
+  }
+
+  set UserId(value: any)
+  {
+    localStorage.setItem("id", value);
+  }
+
+  GetRequestParam(url)
+  {
+    if (url)
+    {
+        let idx = url.indexOf("?");
+        if (idx != -1)
+        {
+            let uri = url.slice(idx + 1);
+            uri = uri.split("&");
+            // console.log(uri)
+            for (let param of uri)
+            {
+              let p = param.split('=');
+              if (p.length > 1)
+              {
+                let param_name = p[0];
+                let param_value = p[1];
+                // console.log(param_name+'====='+param_value);
+                localStorage.setItem(param_name, param_value);
+              }
+            }
+        }
+    }
+  }
+
+  login()
+  {
+      let param = {"username":this.openid};
+      console.log(this.openid)
+      return this.Post(param, 'login2');
+  }
+
+  logout()
+  {
+    localStorage.removeItem('token');
+  }
+
+  has_logon(): Boolean
+  {
+    return localStorage.getItem('token') != undefined;
+  }
+  //签到
+  Sign(){
+    let data={};
+    data['openid']=this.openid;
+    return this.Put(data,'sign');
+  }
+  /*
+  绑定设备接口
+    1.获取设备列表信息
+      Get（）
+    2.解除设备的绑定
+      Delete（id）
+    3.绑定设备
+      Post（iccid）
+   */
+  Device(id?:number,Iccid?:string){
+    console.log(id)
+    let data={};
+    if (id!=null){
+      console.log('this is deletedevices');
+      return this.Delete('devices/'+id);
+    }
+    if(Iccid !=null){
+      data['iccid']=Iccid;
+      console.log('this is Postdevices');
+      return this.Post(data,'devices');
+    }
+    console.log('this is dedevices');
+    return this.Get('devices');
+  }
+  RegisterUser(Phonenum,mycode)
+  {
+    let data = {};
+    // data['openid'] = this.openid;
+    data['openid'] = this.openid;
+    data['mobile_no'] = Phonenum;
+    data['code']=mycode;
+    // data['password'] = Password;
+    // data['mobile_no'] = MobileNo;
+    // data['email'] = Email;
+    // data['name'] = MerchantName;
+    // data['address'] = Address;
+    // data['role_type'] = RoleType;
+
+    return this.Post(data, 'customer');
+  }
+  SendCode(Phonenum){
+    return this.Get('get_code/'+Phonenum);
+  }
+  IfNewUser(){
+    console.log('this is Check_customer');
+    let data={};
+    data['openid'] = this.openid;
+    return this.Put(data,'check_customer');
+  }
+  /*
+  Recharge页面
+   */
+  GetOrder(){
+    console.log('this is get_orders');
+    let data={};
+    data['openid']=this.openid;
+    return this.Put(data,'get_all_orders');
+  }
+  /*
+  OrderPage页面
+  获取充值项目
+   */
+  GetOrderList(){
+    console.log('this is GetOrderList');
+    return this.Get('get_price_list')
+  }
+
+  CreateOrder(iccid,id,price,ot){
+    console.log('this is GetOrderList');
+    let data={};
+    data['iccid']=iccid;
+    data['openid']=this.openid;
+    data['price_list_id']=id;
+    data['price']=price;
+    data['order_type']=ot;
+    return this.Post(data,'recharge');
+  }
+//-----------------------------------------------------------------------------------
+  /**
+   * 查询充值页面
+   * srecharge
+   */
+  SelectCard(iccid){
+    console.log(iccid)
+    let data={};
+    data['iccid']=iccid;
+    return this.Put(data,'query_card');
+
+}
+
+  /**
+   * to
+   */
+  presentToast(data) {
+    let toast = this.toastCtrl.create({
+      message: data.msg,
+      duration: 3000
+    });
+    toast.present();
+  }
+  public UserInfo;
+  public Reged: Boolean;
+
+
+}

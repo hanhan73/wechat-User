@@ -1,0 +1,11 @@
+{
+  "name": "blank",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/sps",
+      "proxyUrl": "http://qx.iwoyi.cn:6888"
+    }
+  ],
+  "type": "ionic-angular"
+}

@@ -1,0 +1,39 @@
+page-srecharge {
+  .item-block{
+    min-height:0rem
+  }
+  ion-label {
+    color: white;
+    text-align: left;
+    padding-top: 2%;
+    padding-left: 12.5%;
+    letter-spacing: 1px;
+  }
+  //ion-label span {
+  //  font-size: 14px;
+  //  margin-left: 10%;
+  //}
+  .card{
+    margin: 7% 12px 12px 12px;
+  }
+  ion-col{
+    border-bottom : 1px #D3D3D3 solid;
+    border-right: 1px #D3D3D3 solid;
+    text-align: center;
+    color:#919191;
+  }
+  .lab2{
+    color: #919191;
+  }
+  .button{
+    margin: 0.8rem 3.2rem;
+  }
+  .srsearch{
+    background-color: white;
+    color: #34A3E7;
+    width: 5rem;
+    margin-left: 25.5rem;
+    margin-top: -4.7rem;
+    height: 2.9rem
+  }
+}

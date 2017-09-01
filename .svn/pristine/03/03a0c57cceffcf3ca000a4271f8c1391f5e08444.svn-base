@@ -1,0 +1,103 @@
+/**
+ * Created by Administrator on 2017/7/13/013.
+ */
+import { ElementRef ,Component} from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TAuth } from '../services';
+import { TopupService } from '../services';
+import { OrderPage } from '../order/order';
+import { HomePage } from '../home/home';
+import {error} from "jweixin";
+@Component({
+  selector: 'page-srecharge',
+  templateUrl: 'srecharge.html'
+})
+
+export class SrechargePage extends TCommonPage {
+
+
+  constructor(private el: ElementRef,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public loadingCtrl: LoadingController,
+              public toastCtrl: ToastController,
+              public auth: TAuth, public top: TopupService) {
+    super(navCtrl, navParams, loadingCtrl, toastCtrl);
+    this.SrInit();
+  }
+
+  /**
+   * 初始化
+   * @param data
+   * @constructor
+   */
+  SrInit(){
+    if(localStorage.getItem('iccid')!=null){
+    this.auth.login().then(
+      data => {
+        localStorage.setItem('token',data.token)
+        this.auth.SelectCard().then(
+          data =>this.CardInfoV(data),
+          error =>console.log(error)
+        )
+      },
+      error =>console.log(error)
+    );
+    }else {
+      this.bgs=1;
+      console.log(this.bgs);
+    }
+  }
+  CardInfoV(data){
+    this.CardInfo=data.data;
+    this.numCard=this.CardInfo.iccid;
+    console.log(this.numCard)
+    console.log(this.CardInfo)
+  }
+  // this.CardInfo=data.data
+
+  ToOrder(){
+    this.navCtrl.push(OrderPage,{item:this.numCard});
+  }
+  Todevice(){
+    let s;
+    this.auth.login().then(
+      data => {
+        localStorage.setItem('token',data.token)
+        this.auth.Device(null,this.numCard).then(
+          data =>{
+            this.auth.presentToast(data)
+            // s==data.status
+            console.log(data);
+          },
+          error =>console.log(error)
+        )
+      },
+      error =>console.log(error)
+    )
+
+    if (0==s){
+      this.navCtrl.push(HomePage);
+    }
+  }
+
+  Bycard(){
+    console.log(this.numCard);
+    this.auth.login().then(
+      data => {
+        localStorage.setItem('token',data.token)
+        this.auth.SelectCard().then(
+          data =>this.CardInfoV(data),
+          error =>console.log(error)
+        )
+      },
+      error =>console.log(error)
+    );
+  }
+
+  private CardInfo;
+  private numCard;
+  private bgs;//背景显示状态
+}

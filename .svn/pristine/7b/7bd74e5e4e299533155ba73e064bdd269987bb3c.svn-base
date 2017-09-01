@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "jweixin": "github:Emeryao/typed-jweixin"
+  }
+}

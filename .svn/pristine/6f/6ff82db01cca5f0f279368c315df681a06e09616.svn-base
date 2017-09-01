@@ -1,0 +1,52 @@
+<ion-header style="height: 30%">
+  <ion-row class="card-header">
+    <ion-col col-5 class="card-number">
+      <img class="card-img" src="assets/icon/Order/4g.png">
+      <div class="card-iccid"><div class="iccid-text">{{iccid}}</div></div>
+    </ion-col>
+    <ion-col class="flow-col">
+      <div class="flow-content">
+        <ion-label class="name-label">
+          <span>全</span>网通<span>全</span>国<span>4G</span>流量
+        </ion-label>
+        <ion-label class="sale-price">官方指导价50元/G</ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-header>
+
+<ion-content >
+  <ion-row>
+    <ion-col  class="ordercss" *ngFor="let ob of good_items" (click)="ChangeOrder(ob)" [ngStyle]="colcss(ob)" style="height: 86px">
+      <ion-label style="color: #f48f0a;" [ngStyle]="lablecss(ob)">
+        <strong [ngStyle]="fontsizecss(ob)">{{ob.flow_size/1024}}</strong>G
+        <span *ngIf="ob.mode == 1">/<strong >{{ob.price}}</strong>元 /赠送500M</span>
+
+        <span  *ngIf="ob.mode == 0" >/<strong>{{(ob.price*ob.discount)/100/100}} </strong>元/<strong>{{ob.discount/100}}</strong>折</span>
+      </ion-label>
+      <div class="colable" [ngStyle]="margincss(ob)">
+        <ion-label style="margin-bottom: 1px"><strong *ngIf="ob.mode==undefined">￥ {{ob.price/100}}</strong>
+          <span *ngIf="ob.mode == 0 || ob.mode == 1">距离结束还剩</span>
+        </ion-label>
+        <ion-label style="text-decoration: line-through;" *ngIf="ob.mode==undefined">官方指导价￥{{(ob.flow_size/1024)*50}}</ion-label>
+
+        <ion-row class="rowtime"  *ngIf="ob.mode==0 || ob.mode == 1">
+          <ion-col class="coltime"> {{hours}}</ion-col>
+          <ion-col col-1 style="color: white"> <strong>:</strong></ion-col>
+          <ion-col class="coltime"> {{diviser}}</ion-col>
+          <ion-col col-1 style="color: white"> <strong>:</strong></ion-col>
+          <ion-col class="coltime"> {{seconde}}</ion-col>
+        </ion-row>
+
+
+
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer style="color: #a0a0a0; text-align: center">
+  <ion-label>温馨提示:</ion-label>
+  <ion-label>支付成功后流量到账通常稍有延迟，请耐心等待</ion-label>
+  <ion-label>并尽量避免在每月月末高峰期间进行充值</ion-label>
+</ion-footer>

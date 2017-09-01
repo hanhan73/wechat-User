@@ -1,0 +1,133 @@
+  /**
+   * Created by Administrator on 2017/7/13/013.
+   */
+  import { ElementRef ,Component} from '@angular/core';
+  import { NavController, NavParams } from 'ionic-angular';
+  import { LoadingController, ToastController } from 'ionic-angular';
+  import { TCommonPage } from '../basic-page';
+  import { TAuth } from '../services';
+  import { TopupService } from '../services';
+  import { OrderPage } from '../order/order';
+  import { HomePage } from '../home/home';
+  import {error} from "jweixin";
+  @Component({
+    selector: 'page-srecharge',
+    templateUrl: 'srecharge.html'
+  })
+
+  export class SrechargePage extends TCommonPage {
+
+
+    constructor(private el: ElementRef,
+                public navCtrl: NavController,
+                public navParams: NavParams,
+                public loadingCtrl: LoadingController,
+                public toastCtrl: ToastController,
+                public auth: TAuth, public top: TopupService) {
+      super(navCtrl, navParams, loadingCtrl, toastCtrl);
+      this.SrInit();
+
+    }
+
+    /**
+     * 初始化
+     * @param data
+     * @constructor
+     */
+    SrInit() {
+      if(localStorage.getItem('iccid') != null) {
+        this.numCard = localStorage.getItem('iccid');
+        localStorage.removeItem('iccid');
+        this.auth.login().then(
+          data => {
+            localStorage.setItem('token',data.token)
+            this.auth.SelectCard(
+              this.numCard
+            ).then(
+              data =>this.CardInfoV(data),
+              error =>console.log(error)
+            )
+          },
+          error =>console.log(error)
+        );
+      }
+      else {
+        this.bgs=1;
+        console.log('77777'+this.bgs);
+      }
+
+    }
+
+    CardInfoV(data) {
+      this.CardInfo = data.data;
+      if (this.CardInfo != null) {
+          this.auth.AddInfo(
+            this.numCard,
+            this.numCard
+          ).then(
+            data => console.log(data),
+            error => console.log(error)
+          )
+      }
+
+      console.log(this.numCard)
+      console.log(this.CardInfo)
+    }
+
+    ToOrder() {
+      this.navCtrl.push(OrderPage,{item:this.numCard});
+    }
+
+    /**
+     * 绑定设备
+     * @constructor
+     */
+    Todevice() {
+      this.auth.login().then(
+        data => {
+          localStorage.setItem('token',data.token)
+          this.auth.Device(null,this.numCard).then(
+            data =>{
+              this.auth.presentToast(data)
+               if(data.status == 1){
+                  this.Loading();
+                  this.navCtrl.push(HomePage);
+                  this.FreeLoading();
+               }
+            },
+            error =>console.log(error)
+          )
+        },
+        error =>console.log(error)
+      )
+
+    }
+
+    Bycard() {
+      if ((this.numCard == '')|| (this.numCard == undefined)){
+        this.CardInfo = null;
+        this.bgs = 1;
+        console.log(this.bgs);
+        return;
+      }
+
+      this.bgs=null;
+      this.auth.login().then(
+          data => {
+            localStorage.setItem('token',data.token)
+            this.auth.SelectCard(
+              this.numCard
+            ).then(
+              data =>this.CardInfoV(data),
+              error =>console.log(error)
+            )
+          },
+          error =>console.log(error)
+        );
+
+    }
+
+    private CardInfo;
+    private numCard;
+    private bgs;//背景显示状态
+  }

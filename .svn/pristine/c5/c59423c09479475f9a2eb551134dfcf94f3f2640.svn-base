@@ -1,0 +1,81 @@
+page-myshare{
+
+  ion-header {
+    height: 10rem;
+    background: url("../../assets/icon/myshare/bg.png") no-repeat;
+    background-size: 100%;
+    color: white;
+  }
+  .lable{
+    margin: 19px 8px 11px 0;
+  }
+  .share_lable {
+    font-size: 1.7rem;
+    margin-left: 18px;
+  }
+  .share_lable span {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-left: 8.5rem;
+  }
+  ion-col{
+    text-align: center;
+  }
+  .card {
+    margin: 0 0 0 0;
+    width: calc(100%);
+  }
+  .button {
+    height : 1.8rem;
+    margin: 0 0;
+  }
+  ion-card {
+    border-bottom: 3px solid #e6e6e6;
+  }
+  .cardlable {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #62c2eb;
+  }
+  .cardbtn {
+    background-color: #feca25;
+    border-radius: 6px;
+    margin-left: 32%;
+  }
+  .deposit ion-col {
+    height: 7rem;
+    color: #B4B4B4;
+  }
+  ion-list {
+    color: #B4B4B4;
+    border-bottom: 3px solid #e6e6e6;
+  }
+  ion-avatar {
+    font-size: 1.6rem;
+    color: #B4B4B4;
+  }
+
+  .list-header {
+    padding-left: 15px;
+    border-bottom: none;
+    font-size: 1.6rem;
+    color: #B4B4B4;
+  }
+  ion-col img {
+    width: 60%;
+  }
+  ion-col p {
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  .listcss {
+    margin-top: -35px;
+    //border-bottom: 3px solid #e6e6e6;
+  }
+  .agency img {
+    border: 1px solid #F3BEB8;
+    border-radius: 100%;
+  }
+
+}

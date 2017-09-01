@@ -1,0 +1,89 @@
+import { Component, AfterViewInit } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
+import { TCommonPage } from '../basic-page';
+import { TopupService } from '../services';
+
+@Component({
+  selector: 'page-topup-record',
+  templateUrl: 'topup-record.html'
+})
+
+export class TopupRecordPage extends TCommonPage implements AfterViewInit
+{
+    constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams, 
+        public loadingCtrl: LoadingController, 
+        public toastCtrl: ToastController,
+        public service: TopupService) 
+    {
+        super(navCtrl, navParams, loadingCtrl, toastCtrl);    
+
+        let item = navParams.get('item')
+        this.UserId = item.id;
+        let dt = new Date();
+        this.CurrentDate = this.date2str(dt);
+        
+        this.Refresh();
+    }  
+
+    ionViewDidLoad() 
+    {    
+        console.log('ionViewDidLoad TopupRecordPage');
+    }
+
+    ngAfterViewInit()
+    {
+    }
+
+    GetTopupRecord()
+    {
+        this.Refresh();
+    }
+
+    Refresh()
+    {
+        /*
+          customer_id: 5
+          id:23
+          order_no:"SPS_1494435831"
+          order_time:"2017-05-11 01:03:51"
+          order_value:1
+          pay_time:null
+          pay_value:1    
+        */
+        this.service.TopupRecord(this.UserId, this.CurrentDate).then(
+          data => this.SetData(data),
+          error => console.log(error)
+        );    
+    }
+
+    SetData(data)
+    {
+        this.items = data;
+        this.TotalValue = 0;
+        for(let i = 0; i < this.items.length; i++)
+        {
+          let item = this.items[i];
+          item['payed'] = item.pay_time != null;
+
+          this.TotalValue += item.pay_value;
+        }
+
+        this.TotalValue = this.TotalValue/100;
+        this.TotalCount = this.items.length;
+    }
+
+    ToPay(item)
+    {
+        console.log(item);
+        this.Loading('微信支付中...');
+    }
+
+    private UserId;
+    private CurrentDate;
+    private items;
+    private TotalCount = 0;
+    private TotalValue = 0;
+}
